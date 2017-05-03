@@ -28,7 +28,9 @@ public class PrimaryStage extends Stage {
 	}
 	
 	public void start() {
+		root.setCenter(new KundeTable());
 		root.setBottom(new opretKundeGrid());
+		
 		this.show();
 	}
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 import domain.Kunde;
 
-class hentAlleKunder extends DB {
+class HentAlleKunder extends DB {
 private PreparedStatement statement;
 private	ResultSet rs;
 

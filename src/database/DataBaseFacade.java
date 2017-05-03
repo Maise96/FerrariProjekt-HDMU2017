@@ -1,11 +1,12 @@
 package database;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import Exceptions.KundenFindesIkkeException;
 import domain.Kunde;
 
-public class DatabaseFacade {
+public class DataBaseFacade {
 
 	public void indsætKunde(Kunde kunde) {
 		try {
@@ -22,5 +23,11 @@ public class DatabaseFacade {
 			throw new NullPointerException();
 			//Håndteres med den nullpointerException som der bliver kastet
 		}
+	}
+	public List<Kunde> hentAlleKunder(){
+		return new HentAlleKunder().execute();
+	}
+	public List<Kunde> søgKunder(String søgeOrd){
+		return new SøgKunder().execute(søgeOrd);
 	}
 }
