@@ -13,14 +13,18 @@ public class PrimaryStage extends Stage {
 		this.setTitle("Ferrari Regioanl Software inc.");
 		root = new BorderPane();
 		scene = new Scene(root);
+		
+		this.sizeToScene();
+		this.setScene(scene);
+		this.setResizable(false);
 		scene.setOnKeyReleased(k->{
 			if(k.getCode().equals(KeyCode.ESCAPE)){
 				System.exit(0);
 			}
 		});
-		this.sizeToScene();
-		this.setScene(scene);
-		this.setResizable(false);
+		this.setOnCloseRequest(e->{
+			System.exit(0);
+		});
 	}
 	
 	public void start() {

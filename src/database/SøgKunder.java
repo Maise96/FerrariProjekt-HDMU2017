@@ -8,9 +8,9 @@ import java.util.List;
 
 import domain.Kunde;
 
-public class SøgKunder extends DB{
-PreparedStatement statement;
-ResultSet rs;
+class SøgKunder extends DB{
+private PreparedStatement statement;
+private ResultSet rs;
 	List<Kunde> execute(String søgeord){
 		List<Kunde> kunder = new ArrayList<Kunde>();
 		try{

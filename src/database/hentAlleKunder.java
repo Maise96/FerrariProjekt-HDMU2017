@@ -9,8 +9,8 @@ import java.util.List;
 import domain.Kunde;
 
 class hentAlleKunder extends DB {
-	PreparedStatement statement;
-	ResultSet rs;
+private PreparedStatement statement;
+private	ResultSet rs;
 
 	List<Kunde> execute() {
 		connect();

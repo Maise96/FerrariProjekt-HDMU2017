@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import Exceptions.KundenFindesIkkeException;
 import domain.Kunde;
 
-public class HentKunde extends DB{
-PreparedStatement statement;
-ResultSet rs;
+class HentKunde extends DB{
+private PreparedStatement statement;
+private ResultSet rs;
 	Kunde execute(long cprNr) throws KundenFindesIkkeException{
 		Kunde kunde = null;
 		try{

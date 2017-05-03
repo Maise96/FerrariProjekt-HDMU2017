@@ -1,8 +1,8 @@
 package domain;
 
 public class Kunde {
-long cprNr;
-String navn;
+private long cprNr;
+private String navn;
 	public Kunde(String navn, long cprNr){
 		this.navn = navn;
 		this.cprNr = cprNr;
