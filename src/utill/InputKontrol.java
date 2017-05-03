@@ -1,4 +1,4 @@
-package presentation;
+package utill;
 
 import javafx.scene.control.TextField;
 
@@ -20,7 +20,7 @@ public class InputKontrol {
 		String s = tekst.getText();
 		for (int i = 0; i < s.length(); i++) {
 			String kontrolOmråde = s.substring(i, i + 1);
-			if (!erBogstav(kontrolOmråde) || erTal(kontrolOmråde)) {
+			if (!erBogstav(kontrolOmråde)) {
 				s = s.substring(0, i) + s.substring(i + 1, s.length());
 				updateTextField(tekst, s);
 				i = 0;
@@ -36,7 +36,7 @@ public class InputKontrol {
 		String s = tekst.getText();
 		for (int i = 0; i < s.length(); i++) {
 			String kontrolOmråde = s.substring(i, i + 1);
-			if (erBogstav(kontrolOmråde) || !erTal(kontrolOmråde)) {
+			if (!erTal(kontrolOmråde)) {
 				s = s.substring(0, i) + s.substring(i + 1, s.length());
 				updateTextField(tekst, s);
 				i = 0;
