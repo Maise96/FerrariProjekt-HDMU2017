@@ -9,7 +9,7 @@ public class NavnTextField extends TextField{
 			inputKontrol(k); // kontrollere at inputtet er et bogstav
 		});
 	}
-	public void inputKontrol(KeyEvent k){
+	private void inputKontrol(KeyEvent k){
 		String input = k.getCode().toString();
 		
 		if(erTal(input.substring(input.length()-1,input.length()))){

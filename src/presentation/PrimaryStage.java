@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class PrimaryStage extends Stage {
 	BorderPane root;
 	Scene scene;
-	
+
 	public PrimaryStage(){
 		this.setTitle("Ferrari Regioanl Software inc.");
 		root = new BorderPane();
