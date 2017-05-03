@@ -10,10 +10,9 @@ public class PrimaryStage extends Stage {
 	Scene scene;
 
 	public PrimaryStage(){
-		this.setTitle("Ferrari Regioanl Software inc.");
+		this.setTitle("Ferrari Regional Software inc.");
 		root = new BorderPane();
 		scene = new Scene(root);
-		
 		this.sizeToScene();
 		this.setScene(scene);
 		this.setResizable(false);
@@ -30,7 +29,6 @@ public class PrimaryStage extends Stage {
 	public void start() {
 		root.setCenter(new KundeTable());
 		root.setBottom(new opretKundeGrid());
-		
 		this.show();
 	}
 
