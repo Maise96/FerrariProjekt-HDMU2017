@@ -13,14 +13,15 @@ import javafx.scene.layout.VBox;
 import utill.KundeTableRefresh;
 
 public class KundeTable extends TableView<Kunde>{
-	
+TableColumn<Kunde,String> navnCol;
+TableColumn<Kunde,Long> cprCol;
 	public KundeTable(){
 	KundeTableRefresh.tilmeld(this);
 
-	TableColumn<Kunde,String> navnCol = new TableColumn<Kunde,String>("Navn");
+	navnCol = new TableColumn<Kunde,String>("Navn");
 	navnCol.setCellValueFactory(new PropertyValueFactory<Kunde,String>("navn"));
 	
-	TableColumn<Kunde,Long> cprCol = new TableColumn<Kunde,Long>("CprNr");
+	cprCol = new TableColumn<Kunde,Long>("CprNr");
 	cprCol.setCellValueFactory(new PropertyValueFactory<Kunde,Long>("cprNr"));
 	
 	this.getColumns().setAll(navnCol,cprCol);
@@ -37,13 +38,7 @@ public class KundeTable extends TableView<Kunde>{
 		} catch (SQLException e) {
 			new ErrorMessage("Failed to load customers, check your connection to the database and try again");
 		}
-		
-		TableColumn<Kunde,String> navnCol = new TableColumn<Kunde,String>("Navn");
-		navnCol.setCellValueFactory(new PropertyValueFactory<Kunde,String>("navn"));
-
-		TableColumn<Kunde,Long> cprCol = new TableColumn<Kunde,Long>("CprNr");
-		cprCol.setCellValueFactory(new PropertyValueFactory<Kunde,Long>("cprNr"));
-		
+				
 		kundeTable.setItems(kundeListe);
 		kundeTable.getColumns().setAll(navnCol,cprCol);
 		

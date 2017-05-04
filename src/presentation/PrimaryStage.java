@@ -28,14 +28,18 @@ public class PrimaryStage extends Stage {
 	}
 	
 	public void start() {
-		kundeTable = new KundeTable();
-		new KundeTableRefresh(this);
+		setUpTable();
 		root.setCenter(kundeTable);
 		root.setBottom(new OpretKundeGrid());
 		this.show();
 	}
 	public void setKundeTable(KundeTable kundeTable){
 		this.kundeTable = kundeTable;
+	}
+	private void setUpTable(){
+		kundeTable = new KundeTable();
+		new KundeTableRefresh(this);
+		kundeTable.refresh();
 	}
 
 }
