@@ -3,23 +3,24 @@ package threads;
 import presentation.CprTextField;
 import presentation.OpretKundeButton;
 
-public class OpretKundeObserver extends Thread{
-CprTextField cprNr;
-OpretKundeButton opretKundeButton;
-	public OpretKundeObserver(CprTextField cprNr, OpretKundeButton opretKundeButton){
-		this.cprNr = cprNr;
+public class OpretKundeObserver {
+	CprTextField cprNr;
+	OpretKundeButton opretKundeButton;
+
+	public OpretKundeObserver(OpretKundeButton opretKundeButton) {
 		this.opretKundeButton = opretKundeButton;
 	}
 
-	@Override
-	public void run() {
-		while(true){
-			if(cprNr.getText().length()==10){
-				opretKundeButton.setDisable(false);
-			} else {
-				opretKundeButton.setDisable(true);
-				Sleeper.nap();
-			}
+	public void check() {
+		if (cprNr.getText().length() == 10) {
+			opretKundeButton.setDisable(false);
+		} else {
+			opretKundeButton.setDisable(true);
 		}
+	}
+
+	public void tilmeldTextField(CprTextField cprNr) {
+		this.cprNr = cprNr;
+
 	}
 }

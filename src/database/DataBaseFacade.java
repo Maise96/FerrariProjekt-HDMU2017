@@ -8,12 +8,9 @@ import domain.Kunde;
 
 public class DataBaseFacade {
 
-	public void indsætKunde(Kunde kunde) {
-		try {
+	public void indsætKunde(Kunde kunde) throws SQLException{
 			new IndsætKunde().execute(kunde);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	
 	}
 
 	public Kunde hentKunde(long cprNr) throws NullPointerException{
@@ -24,7 +21,7 @@ public class DataBaseFacade {
 			//Håndteres med den nullpointerException som der bliver kastet
 		}
 	}
-	public List<Kunde> hentAlleKunder(){
+	public List<Kunde> hentAlleKunder() throws SQLException{
 		return new HentAlleKunder().execute();
 	}
 	public List<Kunde> søgKunder(String søgeOrd){

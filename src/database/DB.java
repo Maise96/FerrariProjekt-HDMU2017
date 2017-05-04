@@ -6,14 +6,17 @@ import java.sql.SQLException;
 
 public abstract class DB {
 	protected Connection connection;
-	String url;
+	String url=" ";
 
-	protected void connect() {
+	public DB(){
+	}
+	
+	protected void connect() throws SQLException {
 		try {
 			connection = DriverManager.getConnection(url);
 			connection.setAutoCommit(false);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException | NullPointerException e) {
+			throw new SQLException();
 		}
 	}
 
