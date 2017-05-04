@@ -1,9 +1,9 @@
-package utill;
+package presentation;
 
 import presentation.KundeTable;
 import presentation.PrimaryStage;
 
-public class KundeTableRefresh {
+class KundeTableRefresh {
 static KundeTable kundeTable;
 static PrimaryStage lokation;	
 	public KundeTableRefresh(PrimaryStage lokation){

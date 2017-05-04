@@ -5,9 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import domain.Kunde;
-import presentation.ErrorMessage;
 
 class HentAlleKunder extends DB {
 private PreparedStatement statement;

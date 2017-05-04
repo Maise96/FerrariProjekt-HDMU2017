@@ -7,9 +7,8 @@ import Exceptions.IllegalNavnException;
 import database.DataBaseFacade;
 import domain.Kunde;
 import javafx.scene.control.Button;
-import utill.KundeTableRefresh;
 
-public class OpretKundeButton extends Button {
+class OpretKundeButton extends Button {
 	NavnTextField navn;
 	CprTextField cprNr;
 

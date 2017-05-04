@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class LaanStage extends  Stage{
+class LaanStage extends  Stage{
 BorderPane root;
 Scene scene;
 	public LaanStage(Kunde kunde){
@@ -19,4 +19,3 @@ Scene scene;
 		this.show();
 	}
 }
-/*test ændring */

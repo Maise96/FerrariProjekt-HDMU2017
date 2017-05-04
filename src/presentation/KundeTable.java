@@ -9,10 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
-import utill.KundeTableRefresh;
 
-public class KundeTable extends TableView<Kunde>{
+class KundeTable extends TableView<Kunde>{
 TableColumn<Kunde,String> navnCol;
 TableColumn<Kunde,Long> cprCol;
 	public KundeTable(){

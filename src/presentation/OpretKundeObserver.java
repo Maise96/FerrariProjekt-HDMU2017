@@ -1,7 +1,4 @@
-package threads;
-
-import presentation.CprTextField;
-import presentation.OpretKundeButton;
+package presentation;
 
 public class OpretKundeObserver {
 	CprTextField cprNr;
