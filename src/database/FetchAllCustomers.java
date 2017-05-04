@@ -5,21 +5,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import domain.Kunde;
+import domain.Customer;
 
-class HentAlleKunder extends DB {
+class FetchAllCustomers extends DB {
 private PreparedStatement statement;
 private	ResultSet rs;
 
-	List<Kunde> execute() throws SQLException{
+	List<Customer> execute() throws SQLException{
 		connect();
-		List<Kunde> kunder = new ArrayList<Kunde>();
+		List<Customer> kunder = new ArrayList<Customer>();
 		try {
 			connection.prepareStatement("SELECT * FROMT KUNDE");
 			rs = statement.executeQuery();
 
 			while (rs.next()) {
-				kunder.add(new Kunde(rs.getString("NAVN"), rs.getLong("CPRNR")));
+				kunder.add(new Customer(rs.getString("NAVN"), rs.getLong("CPRNR")));
 			}
 			disConnect();
 			rs.close();

@@ -8,10 +8,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-class ErrorMessage extends Stage {
-	GridPane grid;
-	Scene scene;
-	String errorMessage;
+public class ErrorMessage extends Stage {
+	private GridPane grid;
+	private Scene scene;
 		public ErrorMessage(String errorMessage){
 			grid = new GridPane();
 			scene = new Scene(grid);
@@ -36,5 +35,4 @@ class ErrorMessage extends Stage {
 			});
 			this.show();
 		}
-	
 }

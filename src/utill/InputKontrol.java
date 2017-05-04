@@ -16,35 +16,35 @@ public class InputKontrol {
 		tekst.positionCaret(s.length());
 	}
 
-	public void tilladBogstaver(TextField tekst) {
-		String s = tekst.getText();
+	public void allowLetters(TextField text) {
+		String s = text.getText();
 		for (int i = 0; i < s.length(); i++) {
-			String kontrolOmråde = s.substring(i, i + 1);
-			if (!erBogstav(kontrolOmråde)) {
+			String checkLetter = s.substring(i, i + 1);
+			if (!erBogstav(checkLetter)) {
 				s = s.substring(0, i) + s.substring(i + 1, s.length());
-				updateTextField(tekst, s);
+				updateTextField(text, s);
 				i = 0;
 			}
 		}
 		if (s.length() == 1 && !erBogstav(s)) {
 			s = "";
-			updateTextField(tekst, s);
+			updateTextField(text, s);
 		}
 	}
 
-	public void tilladTal(TextField tekst) {
-		String s = tekst.getText();
+	public void allowNumbers(TextField text) {
+		String s = text.getText();
 		for (int i = 0; i < s.length(); i++) {
-			String kontrolOmråde = s.substring(i, i + 1);
-			if (!erTal(kontrolOmråde)) {
+			String checkLetter = s.substring(i, i + 1);
+			if (!erTal(checkLetter)) {
 				s = s.substring(0, i) + s.substring(i + 1, s.length());
-				updateTextField(tekst, s);
+				updateTextField(text, s);
 				i = 0;
 			}
 		}
 		if (s.length() == 1 && !erTal(s)) {
 			s = "";
-			updateTextField(tekst, s);
+			updateTextField(text, s);
 		}
 	}
 }

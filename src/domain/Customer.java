@@ -1,20 +1,20 @@
 package domain;
 
-public class Kunde {
+public class Customer {
 private long cprNr;
-private String navn;
-	public Kunde(String navn, long cprNr){
-		this.navn = navn;
+private String name;
+	public Customer(String navn, long cprNr){
+		this.name = navn;
 		this.cprNr = cprNr;
 	}
 	public String getNavn(){
-		return navn;
+		return name;
 	}
 	public long getCprNr(){
 		return cprNr;
 	}
 	@Override
 	public String toString(){
-		return navn + " " + cprNr;
+		return name + " " + cprNr;
 	}
 }

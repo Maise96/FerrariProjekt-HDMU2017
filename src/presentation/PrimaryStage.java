@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class PrimaryStage extends Stage {
 	BorderPane root;
 	Scene scene;
-	KundeTable kundeTable;
+	CustomerTable kundeTable;
 	public PrimaryStage(){
 		this.setTitle("Ferrari Regional Software inc.");
 		root = new BorderPane();
@@ -30,15 +30,15 @@ public class PrimaryStage extends Stage {
 	public void start() {
 		setUpTable();
 		root.setCenter(kundeTable);
-		root.setBottom(new OpretKundeGrid());
+		root.setBottom(new CreateCustomerGrid());
 		this.show();
 	}
-	public void setKundeTable(KundeTable kundeTable){
+	public void setKundeTable(CustomerTable kundeTable){
 		this.kundeTable = kundeTable;
 	}
 	private void setUpTable(){
-		kundeTable = new KundeTable();
-		new KundeTableRefresh(this);
+		kundeTable = new CustomerTable();
+		new CustomerTableRefresh(this);
 		kundeTable.refreshTable(kundeTable);
 	}
 

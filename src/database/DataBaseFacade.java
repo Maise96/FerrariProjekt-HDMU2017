@@ -3,28 +3,28 @@ package database;
 import java.sql.SQLException;
 import java.util.List;
 
-import Exceptions.KundenFindesIkkeException;
-import domain.Kunde;
+import Exceptions.NoSuchCustomerException;
+import domain.Customer;
 
 public class DataBaseFacade {
 
-	public void indsætKunde(Kunde kunde) throws SQLException{
-			new IndsætKunde().execute(kunde);
+	public void indsætKunde(Customer kunde) throws SQLException{
+			new InsetCustomer().execute(kunde);
 	
 	}
 
-	public Kunde hentKunde(long cprNr) throws NullPointerException{
+	public Customer hentKunde(long cprNr) throws NullPointerException{
 		try {
-			return new HentKunde().execute(cprNr);
-		} catch (KundenFindesIkkeException e) {
+			return new FetchCustomer().execute(cprNr);
+		} catch (NoSuchCustomerException e) {
 			throw new NullPointerException();
 			//Håndteres med den nullpointerException som der bliver kastet
 		}
 	}
-	public List<Kunde> hentAlleKunder() throws SQLException{
-		return new HentAlleKunder().execute();
+	public List<Customer> hentAlleKunder() throws SQLException{
+		return new FetchAllCustomers().execute();
 	}
-	public List<Kunde> søgKunder(String søgeOrd){
-		return new SøgKunder().execute(søgeOrd);
+	public List<Customer> søgKunder(String søgeOrd){
+		return new SearchCustomers().execute(søgeOrd);
 	}
 }

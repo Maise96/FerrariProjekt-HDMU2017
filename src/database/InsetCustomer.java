@@ -3,11 +3,11 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import domain.Kunde;
+import domain.Customer;
 
-class IndsætKunde extends DB{
+class InsetCustomer extends DB{
 private PreparedStatement statement;
-	void execute(Kunde kunde) throws SQLException{
+	void execute(Customer kunde) throws SQLException{
 		super.connect();
 		statement = connection.prepareStatement("INSERT INTO KUNDE (NAVN, CPRNR) VALUES(?,?)");
 		statement.setString(0, kunde.getNavn());

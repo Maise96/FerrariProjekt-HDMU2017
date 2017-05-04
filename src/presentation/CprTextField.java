@@ -5,10 +5,10 @@ import utill.InputKontrol;
 
 class CprTextField extends TextField {
 	
-	public CprTextField(OpretKundeObserver op){
-		op.tilmeldTextField(this);
+	public CprTextField(NewCustomerObserver op){
+		op.observeTextField(this);
 		this.setOnKeyReleased(k->{
-			new InputKontrol().tilladTal(this);
+			new InputKontrol().allowNumbers(this);
 			op.check();
 		});
 	}

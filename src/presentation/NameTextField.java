@@ -3,10 +3,10 @@ package presentation;
 import javafx.scene.control.TextField;
 import utill.InputKontrol;
 
-class NavnTextField extends TextField{
-	public NavnTextField(){
+class NameTextField extends TextField{
+	public NameTextField(){
 		this.setOnKeyReleased(k->{
-			new InputKontrol().tilladBogstaver(this);
+			new InputKontrol().allowLetters(this);
 		});
 	}
 

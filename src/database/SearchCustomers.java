@@ -6,19 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Kunde;
+import domain.Customer;
 
-class SøgKunder extends DB{
+class SearchCustomers extends DB{
 private PreparedStatement statement;
 private ResultSet rs;
-	List<Kunde> execute(String søgeord){
-		List<Kunde> kunder = new ArrayList<Kunde>();
+	List<Customer> execute(String søgeord){
+		List<Customer> kunder = new ArrayList<Customer>();
 		try{
 		connect();
 		statement = connection.prepareStatement("select * from kunde where navn like ? or cprnr like ?");
 		rs = statement.executeQuery();
 		while(rs.next()){
-			kunder.add(new Kunde(rs.getString("navn"), rs.getLong("cprnr")));
+			kunder.add(new Customer(rs.getString("navn"), rs.getLong("cprnr")));
 		}
 		disConnect();
 		rs.close();

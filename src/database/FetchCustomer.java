@@ -4,24 +4,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Exceptions.KundenFindesIkkeException;
-import domain.Kunde;
+import Exceptions.NoSuchCustomerException;
+import domain.Customer;
 
-class HentKunde extends DB{
+class FetchCustomer extends DB{
 private PreparedStatement statement;
 private ResultSet rs;
-	Kunde execute(long cprNr) throws KundenFindesIkkeException{
-		Kunde kunde = null;
+	Customer execute(long cprNr) throws NoSuchCustomerException{
+		Customer kunde = null;
 		try{
 			connect();
 			statement = connection.prepareStatement("select * from kunde where cpr = ?");
 			statement.setLong(0, cprNr);
 			rs = statement.executeQuery();
 			if(rs.next()){
-				kunde = new Kunde(rs.getString("navn"), cprNr);
+				kunde = new Customer(rs.getString("navn"), cprNr);
 			}
 			else{
-				throw new KundenFindesIkkeException();
+				throw new NoSuchCustomerException();
 			}
 		
 		}	

@@ -1,8 +1,10 @@
 package launch;
 
+import java.math.BigDecimal;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
-import presentation.PrimaryStage;
+import logic.cprKryptering;
 
 public class Main extends Application {
 
@@ -12,6 +14,8 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage arg0) throws Exception {
-		new PrimaryStage();
+//		new PrimaryStage();
+		BigDecimal cprNr = new BigDecimal("0703942881");
+		new cprKryptering().krypter(cprNr);
 	}
 }
