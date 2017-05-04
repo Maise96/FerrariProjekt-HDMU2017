@@ -15,7 +15,6 @@ public class ErrorMessage extends Stage {
 		public ErrorMessage(String errorMessage){
 			grid = new GridPane();
 			scene = new Scene(grid);
-			
 			Button button = new Button("ok");
 			button.setOnAction(e->{
 				this.close();

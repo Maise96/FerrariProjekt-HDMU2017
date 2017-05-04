@@ -25,6 +25,7 @@ public class PrimaryStage extends Stage {
 		this.setOnCloseRequest(e->{
 			System.exit(0);
 		});
+		start();
 	}
 	
 	public void start() {
@@ -39,7 +40,7 @@ public class PrimaryStage extends Stage {
 	private void setUpTable(){
 		kundeTable = new KundeTable();
 		new KundeTableRefresh(this);
-		kundeTable.refresh();
+		kundeTable.refreshTable(kundeTable);
 	}
 
 }

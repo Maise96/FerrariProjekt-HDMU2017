@@ -26,7 +26,7 @@ public class InputKontrol {
 				i = 0;
 			}
 		}
-		if (s.length() == 1 && !erBogstav(s) || erTal(s)) {
+		if (s.length() == 1 && !erBogstav(s)) {
 			s = "";
 			updateTextField(tekst, s);
 		}
@@ -42,7 +42,7 @@ public class InputKontrol {
 				i = 0;
 			}
 		}
-		if (s.length() == 1 && erBogstav(s) || !erTal(s)) {
+		if (s.length() == 1 && !erTal(s)) {
 			s = "";
 			updateTextField(tekst, s);
 		}
