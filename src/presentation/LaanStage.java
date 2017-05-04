@@ -19,3 +19,4 @@ Scene scene;
 		this.show();
 	}
 }
+/*test ændring */
