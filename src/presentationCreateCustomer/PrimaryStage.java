@@ -1,4 +1,4 @@
-package presentation;
+package presentationCreateCustomer;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -33,7 +33,7 @@ public class PrimaryStage extends Stage {
 		root.setBottom(new CreateCustomerGrid());
 		this.show();
 	}
-	public void setKundeTable(CustomerTable kundeTable){
+	public void setCustomerTable(CustomerTable kundeTable){
 		this.kundeTable = kundeTable;
 	}
 	private void setUpTable(){

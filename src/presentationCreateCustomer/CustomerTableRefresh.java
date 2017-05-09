@@ -1,7 +1,7 @@
-package presentation;
+package presentationCreateCustomer;
 
-import presentation.CustomerTable;
-import presentation.PrimaryStage;
+import presentationCreateCustomer.CustomerTable;
+import presentationCreateCustomer.PrimaryStage;
 
 class CustomerTableRefresh {
 static CustomerTable customerTable;
@@ -10,7 +10,7 @@ static PrimaryStage location;
 		CustomerTableRefresh.location = lokation;
 	}
 	public static void refresh(){
-		location.setKundeTable(customerTable.refreshTable(customerTable));
+		location.setCustomerTable(customerTable.refreshTable(customerTable));
 	}
 	public static void tilmeld(CustomerTable kundeTable){
 		CustomerTableRefresh.customerTable=kundeTable;

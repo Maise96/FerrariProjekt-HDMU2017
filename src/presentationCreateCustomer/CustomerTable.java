@@ -1,7 +1,8 @@
-package presentation;
+package presentationCreateCustomer;
 
 import java.sql.SQLException;
 
+import Exceptions.ErrorMessage;
 import database.DataBaseFacade;
 import domain.Customer;
 import javafx.collections.FXCollections;

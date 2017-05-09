@@ -1,12 +1,8 @@
-package presentation;
+package presentationCreateCustomer;
 
 public class NewCustomerObserver {
 	CprTextField cprNr;
 	NewCustomerButton newCustomerButton;
-
-	public NewCustomerObserver(NewCustomerButton opretKundeButton) {
-		this.newCustomerButton = opretKundeButton;
-	}
 
 	public void check() {
 		if (cprNr.getText().length() == 10) {
@@ -18,6 +14,8 @@ public class NewCustomerObserver {
 
 	public void observeTextField(CprTextField cprNr) {
 		this.cprNr = cprNr;
-
+	}
+	public void assignButton(NewCustomerButton e){
+		this.newCustomerButton = e;
 	}
 }

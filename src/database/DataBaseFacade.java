@@ -8,23 +8,19 @@ import domain.Customer;
 
 public class DataBaseFacade {
 
-	public void indsætKunde(Customer kunde) throws SQLException{
-			new InsetCustomer().execute(kunde);
-	
+	public void indsetCustomer(Customer kunde) throws SQLException {
+		new InsetCustomer().execute(kunde);
 	}
 
-	public Customer hentKunde(long cprNr) throws NullPointerException{
-		try {
-			return new FetchCustomer().execute(cprNr);
-		} catch (NoSuchCustomerException e) {
-			throw new NullPointerException();
-			//Håndteres med den nullpointerException som der bliver kastet
-		}
+	public Customer hentKunde(long cprNr) throws NoSuchCustomerException {
+		return new GetCustomer().execute(cprNr);
 	}
-	public List<Customer> hentAlleKunder() throws SQLException{
+
+	public List<Customer> hentAlleKunder() throws SQLException {
 		return new FetchAllCustomers().execute();
 	}
-	public List<Customer> søgKunder(String søgeOrd){
+
+	public List<Customer> søgKunder(String søgeOrd) {
 		return new SearchCustomers().execute(søgeOrd);
 	}
 }

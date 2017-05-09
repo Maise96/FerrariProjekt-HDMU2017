@@ -8,15 +8,12 @@ import java.util.List;
 import domain.Customer;
 
 class FetchAllCustomers extends DB {
-private PreparedStatement statement;
-private	ResultSet rs;
-
 	List<Customer> execute() throws SQLException{
 		connect();
 		List<Customer> kunder = new ArrayList<Customer>();
 		try {
-			connection.prepareStatement("SELECT * FROMT KUNDE");
-			rs = statement.executeQuery();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROMT KUNDE");
+			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
 				kunder.add(new Customer(rs.getString("NAVN"), rs.getLong("CPRNR")));
