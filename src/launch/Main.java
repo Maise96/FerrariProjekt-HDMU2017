@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 import presentationCreateCustomer.PrimaryStage;
 import presentationCreditPlan.CreditPlanStage;
 
+import com.ferrari.finances.dk.bank.*;
+
 public class Main extends Application {
 
 	public static void main(String[] args) {
