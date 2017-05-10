@@ -10,9 +10,12 @@ CprTextField cprNr;
 NameTextField name;
 NewCustomerButton createCustomerButton;
 	public CreateCustomerGrid(){
-		name = new NameTextField();
 		NewCustomerObserver obs = new NewCustomerObserver();
-		cprNr = new CprTextField(obs);
+		cprNr = new CprTextField();
+		name = new NameTextField();
+		cprNr.assignObserver(obs);
+		name.assignObserver(obs);
+		
 		createCustomerButton = new NewCustomerButton(name,cprNr, obs);
 		this.setAlignment(Pos.BASELINE_CENTER);
 		this.setPadding(new Insets(20,20,20,20));

@@ -8,7 +8,7 @@ import domain.Customer;
 
 public class DataBaseFacade {
 
-	public void indsetCustomer(Customer kunde) throws SQLException {
+	public void insetCustomer(Customer kunde) throws SQLException {
 		new InsetCustomer().execute(kunde);
 	}
 
@@ -16,11 +16,11 @@ public class DataBaseFacade {
 		return new GetCustomer().execute(cprNr);
 	}
 
-	public List<Customer> hentAlleKunder() throws SQLException {
+	public List<Customer> getAllCustomers() throws SQLException {
 		return new FetchAllCustomers().execute();
 	}
 
-	public List<Customer> søgKunder(String søgeOrd) {
-		return new SearchCustomers().execute(søgeOrd);
+	public List<Customer> searchCustomers(String navn,String cpr) {
+		return new SearchCustomers().execute(navn,cpr);
 	}
 }

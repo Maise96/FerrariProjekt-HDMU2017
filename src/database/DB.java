@@ -20,10 +20,17 @@ abstract class DB {
 		}
 	}
 
-	protected void disConnect() {
+	protected void disConnect(){
 		try {
 			connection.commit();
 			connection.close();
+		} catch (SQLException e) {
+			abort();
+		}
+	}
+	protected void abort (){
+		try {
+			connection.rollback();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

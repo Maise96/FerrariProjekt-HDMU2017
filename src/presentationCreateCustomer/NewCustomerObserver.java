@@ -1,21 +1,42 @@
 package presentationCreateCustomer;
 
+import java.sql.SQLException;
+
+import Exceptions.ErrorMessage;
+import logic.InformationExpert;
+
 public class NewCustomerObserver {
 	CprTextField cprNr;
+	NameTextField name;
 	NewCustomerButton newCustomerButton;
 
-	public void check() {
-		if (cprNr.getText().length() == 10) {
-			newCustomerButton.setDisable(false);
-		} else {
-			newCustomerButton.setDisable(true);
+	void check() {
+		if (cprNr != null && newCustomerButton != null) {
+			if (cprNr.getText().length() == 10) {
+				newCustomerButton.setDisable(false);
+			} else {
+				newCustomerButton.setDisable(true);
+			}
+			searchCustomerTable();
+			
+		}
+	}
+	void searchCustomerTable(){
+		try {
+			CustomerTableRefresh.refresh(new InformationExpert().searchCustomers(name.getText(), cprNr.getText()));
+		} catch (SQLException e) {
+			new ErrorMessage("failed connection to the database");
 		}
 	}
 
-	public void observeTextField(CprTextField cprNr) {
+	void observeTextField(CprTextField cprNr) {
 		this.cprNr = cprNr;
 	}
-	public void assignButton(NewCustomerButton e){
+	void observeTextField(NameTextField name){
+		this.name = name;
+	}
+
+	void assignButton(NewCustomerButton e) {
 		this.newCustomerButton = e;
 	}
 }

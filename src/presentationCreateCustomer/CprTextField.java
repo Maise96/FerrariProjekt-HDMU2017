@@ -4,13 +4,16 @@ import javafx.scene.control.TextField;
 import utill.InputKontrol;
 
 class CprTextField extends TextField {
-	
-	public CprTextField(NewCustomerObserver op){
-		op.observeTextField(this);
+NewCustomerObserver obs;	
+	public CprTextField(){
 		this.setOnKeyReleased(k->{
 			new InputKontrol().allowNumbers(this);
-			op.check();
+			obs.check();
 		});
+	}
+	void assignObserver(NewCustomerObserver obs){
+		this.obs = obs;
+		obs.observeTextField(this);
 	}
 
 }

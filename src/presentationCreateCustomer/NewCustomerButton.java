@@ -33,7 +33,6 @@ class NewCustomerButton extends Button {
 			catch (SQLException e1) {
 				new ErrorMessage("Connection to database failed");
 			}
-			CustomerTableRefresh.refresh();
 		});
 		observer.assignButton(this);
 	}

@@ -21,8 +21,9 @@ class GetCustomer extends DB{
 			else{
 				throw new NoSuchCustomerException();
 			}
+		rs.close();
+		}
 		
-		}	
 		catch(SQLException e){
 			e.printStackTrace();
 		}
