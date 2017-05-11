@@ -1,4 +1,4 @@
-package presentation;
+package presentationCreateCustomer;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,12 +10,15 @@ CprTextField cprNr;
 NameTextField name;
 NewCustomerButton createCustomerButton;
 	public CreateCustomerGrid(){
+		NewCustomerObserver obs = new NewCustomerObserver();
+		cprNr = new CprTextField();
 		name = new NameTextField();
-		createCustomerButton = new NewCustomerButton(name,cprNr);
+		cprNr.assignObserver(obs);
+		name.assignObserver(obs);
+		
+		createCustomerButton = new NewCustomerButton(name,cprNr, obs);
 		this.setAlignment(Pos.BASELINE_CENTER);
 		this.setPadding(new Insets(20,20,20,20));
-		NewCustomerObserver op = new NewCustomerObserver(createCustomerButton);
-		cprNr = new CprTextField(op);
 		this.add(new Label("KundeNavn"), 0, 0);
 		this.add(name, 1, 0);
 		this.add(new Label("CprNr: "), 2, 0);

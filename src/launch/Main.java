@@ -1,12 +1,11 @@
 package launch;
 
-import java.math.BigDecimal;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
-import logic.cprKryptering;
+import presentationCreateCustomer.PrimaryStage;
+import presentationCreditPlan.CreditPlanStage;
 
-import com.ferrari.finances.dk.bank.*;
+//import com.ferrari.finances.dk.bank.*;
 
 public class Main extends Application {
 
@@ -16,8 +15,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage arg0) throws Exception {
-//		new PrimaryStage();
-		BigDecimal cprNr = new BigDecimal("0703942881");
-		new cprKryptering().krypter(cprNr);
+		new PrimaryStage();
+		new CreditPlanStage();
 	}
 }

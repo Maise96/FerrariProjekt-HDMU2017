@@ -1,15 +1,14 @@
-package presentation;
+package presentationCreditPlan;
 
 import javafx.scene.control.TextField;
 import utill.InputKontrol;
 
-class CprTextField extends TextField {
-	
-	public CprTextField(NewCustomerObserver op){
-		op.observeTextField(this);
+class AmountTextField extends TextField {
+
+	AmountTextField(CreditPlanObserver obs){	
 		this.setOnKeyReleased(k->{
 			new InputKontrol().allowNumbers(this);
-			op.check();
+			obs.update();
 		});
 	}
 

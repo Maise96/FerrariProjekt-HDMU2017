@@ -1,4 +1,4 @@
-package presentation;
+package Exceptions;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

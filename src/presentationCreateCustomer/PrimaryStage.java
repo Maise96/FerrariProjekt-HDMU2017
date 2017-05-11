@@ -1,5 +1,8 @@
-package presentation;
+package presentationCreateCustomer;
 
+import java.util.ArrayList;
+
+import domain.Customer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -33,13 +36,13 @@ public class PrimaryStage extends Stage {
 		root.setBottom(new CreateCustomerGrid());
 		this.show();
 	}
-	public void setKundeTable(CustomerTable kundeTable){
+	public void setCustomerTable(CustomerTable kundeTable){
 		this.kundeTable = kundeTable;
 	}
 	private void setUpTable(){
 		kundeTable = new CustomerTable();
 		new CustomerTableRefresh(this);
-		kundeTable.refreshTable(kundeTable);
+		kundeTable.refreshTable(kundeTable, new ArrayList<Customer>());
 	}
 
 }
