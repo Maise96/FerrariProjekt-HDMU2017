@@ -5,16 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-abstract class DB {
+abstract class DBAccess {
 	protected Connection connection;
-	String url=" ";
-
-	public DB(){
-	}
+	String url="jdbc:hsqldb:hsql://localhost/FerrariProgram";
 	
 	protected void connect() throws SQLException {
 		try {
-			connection = DriverManager.getConnection(url);
+			connection = DriverManager.getConnection(url, "SA", "");
 			connection.setAutoCommit(false);
 		} catch (SQLException | NullPointerException e) {
 			throw new SQLException();
