@@ -1,14 +1,18 @@
 package presentationCreditPlan;
 
+import com.ferrari.finances.dk.rki.Rating;
+
 import domain.CreditPlan;
+import domain.Customer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import logic.InformationExpert;
 
 public class CreditPlanStage extends  Stage{
-	public CreditPlanStage(/*Customer kunde*/){ //TODO Sæt det hele pænt op.
+	public CreditPlanStage(/*Customer customer*/){ //TODO Sæt det hele pænt op.
 		this.setTitle("Ferrari Regional Software Inc.");
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root);
@@ -27,7 +31,11 @@ public class CreditPlanStage extends  Stage{
 		overview.setObserver(amountGrid.getObserver());
 		
 		root.setTop(utill);
-		root.setLeft(new CreditAssesmentGrid(/*new CreditAssesment(customer)*/"interest rate goes here","customer creditrating goes here", "customers rate goes here"));
+		Customer testCustomer = new Customer("delete later","0123456789");
+		
+		CreditAssesmentGrid creditGrid = new CreditAssesmentGrid(new InformationExpert().newCreditAssesment(testCustomer));
+		creditGrid.setObserver(amountGrid.getObserver());
+		root.setLeft(creditGrid); //fejl her, indtil videre.
 		
 		root.setBottom(overview);
 		root.setRight(amountGrid);

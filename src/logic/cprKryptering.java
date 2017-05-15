@@ -2,7 +2,7 @@ package logic;
 
 import java.math.BigDecimal;
 
-import Exceptions.ErrorMessage;
+import exceptions.ErrorMessage;
 
 public class cprKryptering {
 	long cprNr;

@@ -4,8 +4,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import presentationCreateCustomer.PrimaryStage;
 import presentationCreditPlan.CreditPlanStage;
+import com.ferrari.finances.dk.bank.*;
 
-//import com.ferrari.finances.dk.bank.*;
 
 public class Main extends Application {
 
@@ -15,7 +15,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage arg0) throws Exception {
+		new UpdateInterestRate().start();
 		new PrimaryStage();
 		new CreditPlanStage();
 	}
+
 }

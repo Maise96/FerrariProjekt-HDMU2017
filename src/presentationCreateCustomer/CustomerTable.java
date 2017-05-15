@@ -3,9 +3,9 @@ package presentationCreateCustomer;
 import java.sql.SQLException;
 import java.util.List;
 
-import Exceptions.ErrorMessage;
 import database.DataBaseFacade;
 import domain.Customer;
+import exceptions.ErrorMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;

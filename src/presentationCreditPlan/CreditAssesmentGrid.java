@@ -1,24 +1,27 @@
 package presentationCreditPlan;
 
+import domain.BankRate;
+import domain.CreditAssesment;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 class CreditAssesmentGrid extends GridPane{
-Label interestRateLabel;
-Label creditRatingLabel;
-Label customerRateLabel;
-String interestRate;
-String creditRating;
-String customerRate;
-	CreditAssesmentGrid(String interestRate,String creditRating,String customerRate){
-		this.interestRate = interestRate;
-		this.creditRating = creditRating;
-		this.customerRate = customerRate;
+private Label interestRateLabel;
+private Label creditRatingLabel;
+private Label customerRateLabel;
+private String interestRate;
+private String creditRating;
+private String customerRate;
+CreditPlanObserver obs;
+	CreditAssesmentGrid(CreditAssesment creditAssesment){
 		
+		interestRate = Double.toString(creditAssesment.getInterestRate());
+		creditRating = creditAssesment.getCreditRating().toString();
+		customerRate = Double.toString(creditAssesment.getCustomerRate());
 		
-		interestRateLabel = new Label(interestRate);
-		creditRatingLabel = new Label(creditRating);
-		customerRateLabel = new Label(customerRate);
+		interestRateLabel = new Label("bank rate : " + interestRate);
+		creditRatingLabel = new Label("credit rating : " + creditRating);
+		customerRateLabel = new Label("customer rate : " + customerRate);
 		
 		this.add(interestRateLabel,0,0);
 		this.add(creditRatingLabel, 0, 1);
@@ -43,8 +46,12 @@ String customerRate;
 		this.customerRate = customerRate;
 	}
 	void update(){
-		interestRateLabel.setText(interestRate);
-		creditRatingLabel.setText(creditRating);
-		customerRateLabel.setText(customerRate);
+		interestRateLabel.setText("bank rate : " + interestRate.substring(0, 4));
+		creditRatingLabel.setText("credit rating : " + creditRating);
+		customerRateLabel.setText("customer rate : " + customerRate.substring(0, 4));
+	}
+	void setObserver(CreditPlanObserver obs){
+		this.obs = obs;
+		obs.tilmeldCreditAssesmentGrid(this);
 	}
 }

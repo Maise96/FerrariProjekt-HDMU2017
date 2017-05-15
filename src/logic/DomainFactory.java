@@ -3,9 +3,8 @@ package logic;
 import domain.Customer;
 
 public class DomainFactory {
-	Customer newCustomer(String navn,long cpr){
+	Customer newCustomer(String navn,String cpr){
 		Customer c = new Customer(navn,cpr);
-		//TODO: tilskriv kunden en kreditVurdering
 		return c;
 	}
 }

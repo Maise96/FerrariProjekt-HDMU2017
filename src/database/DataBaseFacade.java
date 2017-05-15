@@ -3,8 +3,8 @@ package database;
 import java.sql.SQLException;
 import java.util.List;
 
-import Exceptions.NoSuchCustomerException;
 import domain.Customer;
+import exceptions.NoSuchCustomerException;
 
 public class DataBaseFacade {
 
@@ -12,7 +12,7 @@ public class DataBaseFacade {
 		new InsetCustomer().execute(kunde);
 	}
 
-	public Customer hentKunde(long cprNr) throws NoSuchCustomerException {
+	public Customer hentKunde(String cprNr) throws NoSuchCustomerException {
 		return new GetCustomer().execute(cprNr);
 	}
 
