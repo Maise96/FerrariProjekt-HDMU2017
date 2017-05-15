@@ -29,7 +29,7 @@ CreditPlanObserver obs;
 	}
 	String getInterestRate() {
 		return interestRate;
-	}
+	}/*bøh*/
 	void setInterestRate(String interestRate) {
 		this.interestRate = interestRate;
 	}
