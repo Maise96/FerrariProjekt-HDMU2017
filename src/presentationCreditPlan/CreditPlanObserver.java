@@ -34,7 +34,6 @@ class CreditPlanObserver {
 			grid.setCustomerRate(Double.toString(currentCustomerRate - 1));
 		}
 		if (Double.parseDouble(grid.getInterestRate()) != BankRate.rate) {
-			System.out.println("jeg er her");
 			grid.setInterestRate(Double.toString(BankRate.rate));
 			grid.setCustomerRate(Double.toString(amount += BankRate.rate));
 		}

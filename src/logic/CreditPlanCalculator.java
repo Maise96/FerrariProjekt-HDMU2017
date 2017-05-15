@@ -24,7 +24,6 @@ public class CreditPlanCalculator {
 		}
 		while(remaining.subtract(nextPayment).compareTo(BigDecimal.valueOf(0)) == 1);
 		creditPlan.add(new Payment(remaining.doubleValue(),0));
-		System.out.println(creditPlan);
 		return creditPlan;
 	}
 	BigDecimal nextPayment(BigDecimal currentAmount,BigDecimal downPayment, BigDecimal customerRate){
