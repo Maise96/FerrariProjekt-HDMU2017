@@ -1,16 +1,21 @@
 package presentationCreditPlan;
 
+import java.math.BigDecimal;
+
 import domain.BankRate;
 import javafx.scene.control.TextField;
+import logic.InformationExpert;
 
 class CreditPlanObserver {
 	TextField amount;
 	TextField downPayment;
 	CreditPlanOverview overview;
 	CreditAssesmentGrid grid;
+	CreditPlanStage creditPlanStage;
 	boolean ekstraProcent = false;
 
-	void update() { //håndtere hvis der skal ligges 1% procent til kundens rente.
+	void update() { // håndtere hvis der skal ligges 1% procent til kundens
+					// rente.
 		double amount = 0;
 		double downPayment = 0;
 		if (!this.amount.getText().isEmpty())
@@ -18,8 +23,7 @@ class CreditPlanObserver {
 
 		if (!this.downPayment.getText().isEmpty())
 			downPayment = Double.parseDouble(this.downPayment.getText());
-		// overview.update();
-		
+
 		if (amount / 2 >= downPayment && !ekstraProcent) {
 			ekstraProcent = true;
 			double currentCustomerRate = Double.parseDouble(grid.getCustomerRate());
@@ -35,7 +39,10 @@ class CreditPlanObserver {
 			grid.setCustomerRate(Double.toString(amount += BankRate.rate));
 		}
 		grid.update();
-
+		if(downPayment!=0) // laver en ny creditPlan og updatere overview
+		creditPlanStage.setOverview(
+				overview.update(new InformationExpert().newCreditPlan(BigDecimal.valueOf(amount),
+						BigDecimal.valueOf(downPayment), Double.parseDouble(grid.getCustomerRate()))));
 	}
 
 	void assignAmountTextField(TextField amount) {
@@ -52,5 +59,9 @@ class CreditPlanObserver {
 
 	void tilmeldCreditAssesmentGrid(CreditAssesmentGrid grid) {
 		this.grid = grid;
+	}
+
+	void assignStage(CreditPlanStage creditPlanStage) {
+		this.creditPlanStage = creditPlanStage;
 	}
 }

@@ -1,24 +1,31 @@
 package presentationCreditPlan;
 
-import java.sql.Date;
-
 import domain.CreditPlan;
 import domain.Payment;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 class CreditPlanOverview extends TableView<Payment>{
-CreditPlanObserver obs;	
-	public CreditPlanOverview(CreditPlan creditPlan){
+CreditPlanObserver obs;		
+	CreditPlanOverview(CreditPlan creditPlan){
 		
 		TableColumn<Payment,Double> amountCol = new TableColumn<Payment,Double>("Payment");
+		amountCol.setCellValueFactory(new PropertyValueFactory<Payment,Double>("value"));
 		
-		TableColumn<Payment,Date> dateCol = new TableColumn<Payment,Date>("Dato");
+		TableColumn<Payment,Double> remainderCol = new TableColumn<Payment,Double>("remaining");
+		remainderCol.setCellValueFactory(new PropertyValueFactory<Payment,Double>("remaining"));
 		
 		this.setItems(FXCollections.observableArrayList(creditPlan));
-		this.getColumns().setAll(amountCol,dateCol);
+		this.getColumns().setAll(amountCol,remainderCol);
 	}
+	CreditPlanOverview update(CreditPlan creditPlan){
+		this.setItems(FXCollections.observableArrayList(creditPlan));
+		this.refresh();
+		return this;
+	}
+	
 	void setObserver(CreditPlanObserver obs){ //workaround
 		this.obs = obs;
 		obs.assignOverView(this);

@@ -2,9 +2,9 @@ package launch;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import logic.CreditPlanCalculator;
 import presentationCreateCustomer.PrimaryStage;
 import presentationCreditPlan.CreditPlanStage;
-import com.ferrari.finances.dk.bank.*;
 
 
 public class Main extends Application {
