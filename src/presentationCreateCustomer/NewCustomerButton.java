@@ -40,14 +40,7 @@ class NewCustomerButton extends Button {
 	public void insetCustomerIntoDB(NameTextField navn, CprTextField cprNr)
 			throws IllegalNameException, IllegalCprException {
 		
-		if (navn.getText().isEmpty()) {
-			throw new IllegalNameException();
-		}
-
-		try {
-		}  catch (NumberFormatException e) {
-			throw new IllegalCprException();
-		}
+	
 	}
 
 }

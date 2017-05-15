@@ -4,8 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ferrari.finances.dk.rki.Rating;
-
 import domain.Customer;
 import exceptions.NoSuchCustomerException;
 

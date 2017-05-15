@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ferrari.finances.dk.rki.Rating;
-
 import domain.Customer;
 
 class FetchAllCustomers extends DB {
@@ -15,7 +13,7 @@ class FetchAllCustomers extends DB {
 		connect();
 		List<Customer> customers = new ArrayList<Customer>();
 		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROMT KUNDE");
+			PreparedStatement statement = prepareStatement("SELECT * FROM KUNDE");
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
@@ -26,11 +24,7 @@ class FetchAllCustomers extends DB {
 			disConnect();
 			rs.close();
 		} catch (SQLException e) {
-			try {
-				connection.rollback();
-			} catch (SQLException e1) {
-				throw new SQLException();
-			}
+			
 			throw new SQLException();
 		}
 		return customers;
