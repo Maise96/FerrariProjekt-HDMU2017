@@ -4,16 +4,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Exceptions.NoSuchCustomerException;
+import com.ferrari.finances.dk.rki.Rating;
+
 import domain.Customer;
+import exceptions.NoSuchCustomerException;
 
 class GetCustomer extends DB{
-	Customer execute(long cprNr) throws NoSuchCustomerException{
+	Customer execute(String cprNr) throws NoSuchCustomerException{
 		Customer kunde = null;
 		try{
 			connect();
-			PreparedStatement statement = connection.prepareStatement("select * from kunde where cpr = ?");
-			statement.setLong(0, cprNr);
+			PreparedStatement statement = connection.prepareStatement("select * from customer where cpr = ?");
+			statement.setString(0, cprNr);
 			ResultSet rs = statement.executeQuery();
 			if(rs.next()){
 				kunde = new Customer(rs.getString("navn"), cprNr);

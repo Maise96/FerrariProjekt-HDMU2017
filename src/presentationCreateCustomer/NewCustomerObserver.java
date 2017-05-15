@@ -2,7 +2,7 @@ package presentationCreateCustomer;
 
 import java.sql.SQLException;
 
-import Exceptions.ErrorMessage;
+import exceptions.ErrorMessage;
 import logic.InformationExpert;
 
 public class NewCustomerObserver {

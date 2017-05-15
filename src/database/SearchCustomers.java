@@ -6,23 +6,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.ErrorMessage;
+import com.ferrari.finances.dk.rki.Rating;
+
 import domain.Customer;
+import exceptions.ErrorMessage;
 
 class SearchCustomers extends DB{
 private PreparedStatement statement;
 private ResultSet rs;
-	List<Customer> execute(String navn,String cpr){
-		List<Customer> kunder = new ArrayList<Customer>();
+	List<Customer> execute(String name,String cpr){
+		List<Customer> customers = new ArrayList<Customer>();
 		try{
 		connect();
-		statement = connection.prepareStatement("select * from kunde where navn like ? or cprnr like ?");
-		statement.setString(0, navn);
+		statement = connection.prepareStatement("select * from customer where navn like ? or cprnr like ?");
+		statement.setString(0, name);
 		statement.setLong(1, Long.parseLong(cpr));
 		
 		rs = statement.executeQuery();
 		while(rs.next()){
-			kunder.add(new Customer(rs.getString("navn"), rs.getLong("cprnr")));
+			customers.add(new Customer(rs.getString("navn"),rs.getString("cprnr")));
+			
 		}
 		disConnect();
 		rs.close();
@@ -30,6 +33,6 @@ private ResultSet rs;
 		catch(SQLException e){
 			new ErrorMessage("Search function went wrong");
 		}
-		return kunder;
+		return customers;
 		}
 }

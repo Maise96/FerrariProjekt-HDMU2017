@@ -5,18 +5,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ferrari.finances.dk.rki.Rating;
+
 import domain.Customer;
 
 class FetchAllCustomers extends DB {
 	List<Customer> execute() throws SQLException{
 		connect();
-		List<Customer> kunder = new ArrayList<Customer>();
+		List<Customer> customers = new ArrayList<Customer>();
 		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROMT KUNDE");
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
-				kunder.add(new Customer(rs.getString("NAVN"), rs.getLong("CPRNR")));
+				Customer customer = new Customer(rs.getString("NAVN"), rs.getString("CPRNR"));
+
+				customers.add(customer);
 			}
 			disConnect();
 			rs.close();
@@ -28,7 +33,7 @@ class FetchAllCustomers extends DB {
 			}
 			throw new SQLException();
 		}
-		return kunder;
+		return customers;
 
 	}
 }

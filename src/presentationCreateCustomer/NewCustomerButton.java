@@ -2,9 +2,9 @@ package presentationCreateCustomer;
 
 import java.sql.SQLException;
 
-import Exceptions.ErrorMessage;
-import Exceptions.IllegalCprException;
-import Exceptions.IllegalNameException;
+import exceptions.ErrorMessage;
+import exceptions.IllegalCprException;
+import exceptions.IllegalNameException;
 import javafx.scene.control.Button;
 import logic.InformationExpert;
 
@@ -18,11 +18,10 @@ class NewCustomerButton extends Button {
 		this.name = name;
 		this.cprNr = cprNr;
 		this.setDisable(true);
+		observer.assignButton(this);
 		this.setOnMouseClicked(e -> {
 			try{
-				System.out.println(name);
-				System.out.println(cprNr);
-				new InformationExpert().newCustomer(name.getText(), Long.parseLong(cprNr.getText()) );
+				new InformationExpert().newCustomer(name.getText(), cprNr.getText() );
 				}
 			catch(IllegalNameException e1){
 				new ErrorMessage("name can't be empty");
@@ -33,8 +32,9 @@ class NewCustomerButton extends Button {
 			catch (SQLException e1) {
 				new ErrorMessage("Connection to database failed");
 			}
+			observer.searchCustomerTable();
 		});
-		observer.assignButton(this);
+		
 	}
 
 	public void insetCustomerIntoDB(NameTextField navn, CprTextField cprNr)
