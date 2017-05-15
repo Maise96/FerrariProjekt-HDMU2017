@@ -15,8 +15,17 @@ import exceptions.IllegalNameException;
 public class InformationExpert {
 	
 	public void newCustomer(String name, String cprNr)throws IllegalNameException, IllegalCprException,SQLException{
+		if (name.isEmpty()) 
+			throw new IllegalNameException();
+		
+		if(cprNr.length()!=10)
+			throw new IllegalCprException();
+		
 		Customer customer = new DomainFactory().newCustomer(name, cprNr);
+		
 		new DataBaseFacade().insetCustomer(customer);
+	
+	
 	}
 	public List<Customer> getAllCustomers() throws SQLException{
 		List<Customer> allCustomers = new DataBaseFacade().getAllCustomers();

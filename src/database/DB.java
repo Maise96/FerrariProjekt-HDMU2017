@@ -2,6 +2,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 abstract class DB {
@@ -20,7 +21,7 @@ abstract class DB {
 		}
 	}
 
-	protected void disConnect(){
+	protected void disConnect()throws SQLException{
 		try {
 			connection.commit();
 			connection.close();
@@ -28,11 +29,14 @@ abstract class DB {
 			abort();
 		}
 	}
-	protected void abort (){
+	protected void abort () throws SQLException{
 		try {
 			connection.rollback();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException();
 		}
+	}
+	protected PreparedStatement prepareStatement(String statement)throws SQLException{
+		return connection.prepareStatement(statement);
 	}
 }
