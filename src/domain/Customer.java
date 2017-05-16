@@ -9,6 +9,7 @@ private Boolean trouble;
 	public Customer(String navn, String cprNr, Boolean trouble){
 		this.name = navn;
 		this.cprNr = cprNr;
+		this.trouble = false;
 	}
 	
 	public String getName(){

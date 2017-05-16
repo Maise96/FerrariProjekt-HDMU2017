@@ -16,8 +16,8 @@ class SearchCustomersDB extends DBAccess {
 			connect();
 
 			PreparedStatement statement = prepareStatement("SELECT * FROM CUSTOMERS WHERE CPR = ? AND NAME = ?");
-			statement.setString(0, "%" + cprNr + "%");
-			statement.setString(1, "%" + name + "%");
+			statement.setString(1, "%" + cprNr + "%");
+			statement.setString(2, "%" + name + "%");
 
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
