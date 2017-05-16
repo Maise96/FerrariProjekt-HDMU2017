@@ -8,5 +8,6 @@ class ErrorLabel extends Label{
 		this.setText(s);
 		this.setTextFill(Color.FIREBRICK);
 		this.setWrapText(true);
+//
 	}
 }

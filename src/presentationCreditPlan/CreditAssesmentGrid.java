@@ -15,7 +15,7 @@ private String customerRate;
 CreditPlanObserver obs;
 	CreditAssesmentGrid(CreditAssesment creditAssesment){
 		
-		interestRate = Double.toString(creditAssesment.getInterestRate());
+		interestRate = Double.toString(BankRate.rate);
 		creditRating = creditAssesment.getCreditRating().toString();
 		customerRate = Double.toString(creditAssesment.getCustomerRate());
 		
@@ -31,7 +31,7 @@ CreditPlanObserver obs;
 	}
 	String getInterestRate() {
 		return interestRate;
-	}/*bøh*/
+	}
 	void setInterestRate(String interestRate) {
 		this.interestRate = interestRate;
 	}

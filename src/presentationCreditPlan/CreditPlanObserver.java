@@ -32,9 +32,7 @@ class CreditPlanObserver {
 			ekstraProcent = false;
 			newCustomerRate--;
 		}
-		if (Double.parseDouble(grid.getInterestRate()) != BankRate.rate) {
-			grid.setInterestRate(Double.toString(BankRate.rate));
-		}
+		
 		grid.setCustomerRate(Double.toString(newCustomerRate));
 		grid.update();
 		if(downPayment!=0) // laver en ny creditPlan og updatere overview

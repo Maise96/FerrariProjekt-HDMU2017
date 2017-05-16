@@ -8,13 +8,14 @@ import domain.Payment;
 public class CreditPlanCalculator {
 	
 	public CreditPlan calculateNewCreditPlan(BigDecimal amount, BigDecimal downPayment, double customerRate){
-		BigDecimal BDCustomerRate = BigDecimal.valueOf(customerRate).divide(BigDecimal.valueOf(100),3).add(BigDecimal.valueOf(1));
+		BigDecimal BDCustomerRate = BigDecimal.valueOf(customerRate)
+				.divide(BigDecimal.valueOf(100),3).add(BigDecimal.valueOf(1));
 		CreditPlan creditPlan = new CreditPlan();
 		BigDecimal remaining = amount;
 		BigDecimal nextPayment = nextPayment(remaining,downPayment,BDCustomerRate);
 		do{
 			nextPayment = nextPayment(remaining,downPayment,BDCustomerRate);
-			remaining = remaining.subtract(nextPayment);
+			remaining = remaining.subtract(nextPayment).add(interest(remaining,BDCustomerRate));
 			
 			nextPayment = nextPayment.setScale(3,BigDecimal.ROUND_HALF_EVEN);
 			remaining = remaining.setScale(3, BigDecimal.ROUND_HALF_EVEN);
@@ -27,6 +28,12 @@ public class CreditPlanCalculator {
 		return creditPlan;
 	}
 	BigDecimal nextPayment(BigDecimal currentAmount,BigDecimal downPayment, BigDecimal customerRate){
-		return (currentAmount.multiply(customerRate)).subtract(currentAmount).add(downPayment);
+		
+		return interest(currentAmount,customerRate).add(downPayment);
 	}
+	BigDecimal interest(BigDecimal currentAmount,BigDecimal customerRate){
+				//yearly													//Recalculated to monthly
+		return (currentAmount.multiply(customerRate).subtract(currentAmount)).divide(BigDecimal.valueOf(12),BigDecimal.ROUND_HALF_EVEN);
+	}
+	
 }
