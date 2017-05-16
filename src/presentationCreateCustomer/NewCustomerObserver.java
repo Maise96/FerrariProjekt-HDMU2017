@@ -2,14 +2,17 @@ package presentationCreateCustomer;
 
 import java.sql.SQLException;
 
-import exceptions.ErrorMessage;
 import logic.InformationExpert;
 
 public class NewCustomerObserver {
 	CprTextField cprNr;
 	NameTextField name;
 	NewCustomerButton newCustomerButton;
-
+	SearchCustomerThread searchCustomerThread;
+	public NewCustomerObserver(){
+		searchCustomerThread = new SearchCustomerThread();
+		searchCustomerThread.start();
+	}
 	void check() {
 		if (cprNr != null && newCustomerButton != null) {
 			if (cprNr.getText().length() == 10) {
@@ -17,16 +20,9 @@ public class NewCustomerObserver {
 			} else {
 				newCustomerButton.setDisable(true);
 			}
-			searchCustomerTable();
-			
-		}
-	}
-	void searchCustomerTable(){
-		try {
-			CustomerTableRefresh.refresh(new InformationExpert().searchCustomers(name.getText(), cprNr.getText()));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
+			searchCustomerThread.setSearchName(name.getText());
+			searchCustomerThread.setCpr(cprNr.getText());
+			searchCustomerThread.wakeUp();
 		}
 	}
 

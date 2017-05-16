@@ -1,12 +1,13 @@
 package presentationCreateCustomer;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 
-import domain.Customer;
+import exceptions.ErrorMessage;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import logic.InformationExpert;
 
 public class PrimaryStage extends Stage {
 	BorderPane root;
@@ -42,7 +43,12 @@ public class PrimaryStage extends Stage {
 	private void setUpTable(){
 		kundeTable = new CustomerTable();
 		new CustomerTableRefresh(this);
-		kundeTable.refreshTable(kundeTable, new ArrayList<Customer>());
+		try {
+			kundeTable.refreshTable(new InformationExpert().searchCustomers("", ""));
+		} catch (SQLException e) {
+			new ErrorMessage("Initial setup of Customer Table went wrong");
+			e.printStackTrace();
+		}
 	}
 
 }

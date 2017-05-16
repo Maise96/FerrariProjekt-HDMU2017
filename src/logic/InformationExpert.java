@@ -35,7 +35,7 @@ public class InformationExpert {
 	public void updateBankRate(){
 		new BankRate().update();
 	}
-	public CreditAssesment newCreditAssesment(Customer customer)throws BadCustomerException{
+	public CreditAssesment newCreditAssesment(Customer customer)/*throws BadCustomerException*/{
 		CreditAssesment creditAssesment = new CreditAssesment();
 		creditAssesment = new CreditAssesmentCalculator().newCreditAssesment(customer, new CreditAssesment());
 		return creditAssesment;

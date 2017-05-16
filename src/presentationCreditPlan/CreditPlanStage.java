@@ -1,7 +1,5 @@
 package presentationCreditPlan;
 
-import com.ferrari.finances.dk.rki.Rating;
-
 import domain.CreditAssesment;
 import domain.CreditPlan;
 import domain.Customer;
@@ -15,7 +13,7 @@ import logic.InformationExpert;
 
 public class CreditPlanStage extends  Stage{
 CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
-	public CreditPlanStage(/*Customer customer*/){ //TODO Sæt det hele pænt op.
+	public CreditPlanStage(Customer customer){ //TODO Sæt det hele pænt op.
 		this.setTitle("Ferrari Regional Software Inc.");
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root);
@@ -33,19 +31,14 @@ CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
 		overview.setObserver(amountGrid.getObserver());
 		amountGrid.getObserver().assignStage(this);
 		root.setTop(utill);
-		Customer testCustomer = new Customer("delete later","0123456788",false);
 		
-		try {
-		CreditAssesmentGrid creditGrid = new CreditAssesmentGrid(new InformationExpert().newCreditAssesment(testCustomer));
+		/*try {*/
+		CreditAssesmentGrid creditGrid = new CreditAssesmentGrid(new InformationExpert().newCreditAssesment(customer));
 		creditGrid.setObserver(amountGrid.getObserver());
 		root.setLeft(creditGrid); //fejl her, indtil videre.
-		} catch (BadCustomerException e) {
-			CreditAssesment badCustomerAssesment = new CreditAssesment();
-			badCustomerAssesment.setCreditRating(Rating.D);
-			badCustomerAssesment.setCustomerRate(10000);
-			badCustomerAssesment.setInterestRate(10000000);
-			root.setLeft(new CreditAssesmentGrid(badCustomerAssesment));
-		}
+		/*} catch (BadCustomerException e) {
+			
+		}*/
 		root.setBottom(overview);
 		root.setRight(amountGrid);
 		this.show();

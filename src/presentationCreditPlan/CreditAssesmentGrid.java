@@ -26,6 +26,8 @@ CreditPlanObserver obs;
 		this.add(interestRateLabel,0,0);
 		this.add(creditRatingLabel, 0, 1);
 		this.add(customerRateLabel, 0, 2);
+		
+		update();
 	}
 	String getInterestRate() {
 		return interestRate;
@@ -46,12 +48,20 @@ CreditPlanObserver obs;
 		this.customerRate = customerRate;
 	}
 	void update(){
-		interestRateLabel.setText("bank rate : " + interestRate.substring(0, 4));
+		interestRateLabel.setText("bank rate : " + format(interestRate));
 		creditRatingLabel.setText("credit rating : " + creditRating);
-		customerRateLabel.setText("customer rate : " + customerRate.substring(0, 4));
+		customerRateLabel.setText("customer rate : " + format(customerRate));
 	}
 	void setObserver(CreditPlanObserver obs){
 		this.obs = obs;
 		obs.tilmeldCreditAssesmentGrid(this);
+	}
+	private String format(String s){
+		int antalDecimaler = (s.indexOf(".") - s.length()) * -1;
+		if (antalDecimaler > 3)
+			return s.substring(0, s.indexOf(".") + 3);
+		else
+			return s;
+	
 	}
 }

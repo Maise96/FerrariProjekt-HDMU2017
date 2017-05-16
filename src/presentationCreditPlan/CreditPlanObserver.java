@@ -18,6 +18,7 @@ class CreditPlanObserver {
 					// rente.
 		double amount = 0;
 		double downPayment = 0;
+		double newCustomerRate = Double.parseDouble(grid.getCustomerRate());
 		if (!this.amount.getText().isEmpty())
 			amount = Double.parseDouble(this.amount.getText());
 
@@ -26,17 +27,15 @@ class CreditPlanObserver {
 
 		if (amount / 2 >= downPayment && !ekstraProcent) {
 			ekstraProcent = true;
-			double currentCustomerRate = Double.parseDouble(grid.getCustomerRate());
-			grid.setCustomerRate(Double.toString(currentCustomerRate + 1));
+			newCustomerRate++;
 		} else if (amount / 2 <= downPayment && ekstraProcent) {
 			ekstraProcent = false;
-			double currentCustomerRate = Double.parseDouble(grid.getCustomerRate());
-			grid.setCustomerRate(Double.toString(currentCustomerRate - 1));
+			newCustomerRate--;
 		}
 		if (Double.parseDouble(grid.getInterestRate()) != BankRate.rate) {
 			grid.setInterestRate(Double.toString(BankRate.rate));
-			grid.setCustomerRate(Double.toString(amount += BankRate.rate));
 		}
+		grid.setCustomerRate(Double.toString(newCustomerRate));
 		grid.update();
 		if(downPayment!=0) // laver en ny creditPlan og updatere overview
 		creditPlanStage.setOverview(
