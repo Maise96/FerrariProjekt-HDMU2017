@@ -1,13 +1,9 @@
 package presentationCreateCustomer;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import database.DataBaseFacade;
 import domain.Customer;
-import exceptions.ErrorMessage;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,7 +16,7 @@ TableColumn<Customer,Long> cprCol;
 
 	
 	nameCol = new TableColumn<Customer,String>("Navn");
-	nameCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("navn"));
+	nameCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("name"));
 	
 	cprCol = new TableColumn<Customer,Long>("CprNr");
 	cprCol.setCellValueFactory(new PropertyValueFactory<Customer,Long>("cprNr"));
@@ -31,12 +27,11 @@ TableColumn<Customer,Long> cprCol;
 	this.setMaxSize(200, 300);
 	
 	}
-	public CustomerTable refreshTable(CustomerTable customerTable,List<Customer> customers){
-				
-		customerTable.setItems(FXCollections.observableArrayList(customers));
-		customerTable.getColumns().setAll(nameCol,cprCol);
-		
-		return customerTable;
+	public CustomerTable refreshTable(List<Customer> customers){
+		System.out.println(customers);	
+		this.setItems(FXCollections.observableArrayList(customers));
+		this.refresh();
+		return this;
 	}
 	
 }

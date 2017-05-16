@@ -14,8 +14,8 @@ class SearchCustomersDB extends DBAccess {
 		List<Customer> customers = new ArrayList<Customer>();
 		try {
 			connect();
-
-			PreparedStatement statement = prepareStatement("SELECT * FROM CUSTOMERS WHERE CPR = ? AND NAME = ?");
+			
+			PreparedStatement statement = prepareStatement("SELECT * FROM CUSTOMERS WHERE CPR LIKE ? AND NAME LIKE ?");
 			statement.setString(1, "%" + cprNr + "%");
 			statement.setString(2, "%" + name + "%");
 
@@ -25,7 +25,6 @@ class SearchCustomersDB extends DBAccess {
 			}
 			rs.close();
 			disConnect();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

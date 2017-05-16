@@ -33,7 +33,7 @@ class NewCustomerButton extends Button {
 				new ErrorMessage("Connection to database failed");
 				e1.printStackTrace();
 			}
-			observer.searchCustomerTable();
+			observer.check();
 		});
 		
 	}
