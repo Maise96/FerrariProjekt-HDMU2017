@@ -1,5 +1,5 @@
 package domain;
 
-public class Something {
+public class Something extends Nothing{
 
 }
