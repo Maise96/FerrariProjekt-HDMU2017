@@ -9,13 +9,12 @@ import domain.Customer;
 import exceptions.BadCustomerException;
 
 class CreditAssesmentCalculator {
-	CreditAssesment newCreditAssesment(Customer customer,CreditAssesment creditAssesment)throws BadCustomerException{
+	CreditAssesment newCreditAssesment(Customer customer,CreditAssesment creditAssesment)/*throws BadCustomerException*/{
 		CreditRatorThread ratingThread = new CreditRatorThread();
 		ratingThread.setCreditAssesment(creditAssesment);
 		ratingThread.setCustomer(customer);
 		ratingThread.start();
-		
-		double customerRate = creditAssesment.getInterestRate();
+		double customerRate = BankRate.rate;
 		switch(CreditRator.i().rate(customer.getCprNr())){
 		case A:
 			creditAssesment.setCreditRating(Rating.A);
@@ -30,7 +29,9 @@ class CreditAssesmentCalculator {
 			customerRate +=3;
 			break;
 		case D:
-			throw new BadCustomerException();
+			creditAssesment.setCreditRating(Rating.D);
+			customerRate +=10000;
+			/*	throw new BadCustomerException();*/
 		}
 		
 		creditAssesment.setCustomerRate(customerRate);

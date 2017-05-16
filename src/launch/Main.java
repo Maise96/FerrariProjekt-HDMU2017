@@ -17,7 +17,6 @@ public class Main extends Application {
 	public void start(Stage arg0) throws Exception {
 		new UpdateInterestRate().start();
 		new PrimaryStage();
-		new CreditPlanStage();
 	}
 
 }
