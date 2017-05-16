@@ -25,7 +25,8 @@ public class NewCustomerObserver {
 		try {
 			CustomerTableRefresh.refresh(new InformationExpert().searchCustomers(name.getText(), cprNr.getText()));
 		} catch (SQLException e) {
-			new ErrorMessage("failed connection to the database");
+			e.printStackTrace();
+			
 		}
 	}
 

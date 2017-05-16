@@ -33,7 +33,7 @@ CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
 		overview.setObserver(amountGrid.getObserver());
 		amountGrid.getObserver().assignStage(this);
 		root.setTop(utill);
-		Customer testCustomer = new Customer("delete later","0123456788");
+		Customer testCustomer = new Customer("delete later","0123456788",false);
 		
 		try {
 		CreditAssesmentGrid creditGrid = new CreditAssesmentGrid(new InformationExpert().newCreditAssesment(testCustomer));

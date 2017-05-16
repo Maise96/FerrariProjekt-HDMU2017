@@ -27,7 +27,7 @@ class SearchCustomersDB extends DBAccess {
 			disConnect();
 
 		} catch (SQLException e) {
-			new ErrorMessage("Search function went wrong");
+			e.printStackTrace();
 		}
 
 		return customers;

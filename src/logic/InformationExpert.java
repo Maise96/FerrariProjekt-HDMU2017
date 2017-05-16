@@ -28,10 +28,7 @@ public class InformationExpert {
 	
 	
 	}
-	public List<Customer> getAllCustomers() throws SQLException{
-		List<Customer> allCustomers = new DataBaseFacade().getAllCustomers();
-		return allCustomers;
-	}
+	
 	public List<Customer> searchCustomers(String navn, String cpr)throws SQLException{
 		return new DataBaseFacade().searchCustomers(navn,cpr);
 	}
