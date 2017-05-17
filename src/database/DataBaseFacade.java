@@ -12,10 +12,15 @@ public class DataBaseFacade {
 		new InsetCustomerDB().execute(kunde);
 	}
 
-	public List<Customer> searchCustomers(String navn,String cpr) {
-		return new SearchCustomersDB().execute(navn,cpr);
+	public List<Customer> searchCustomers(String navn, String cpr) {
+		return new SearchCustomersDB().execute(navn, cpr);
 	}
-	public void deleteCustomer(Customer customer)throws CustomerDoesNotExistException,SQLException{
+
+	public void deleteCustomer(Customer customer) throws CustomerDoesNotExistException, SQLException {
 		new DeleteCustomerDB().execute(customer);
+	}
+
+	public void switchTrobleState(Customer customer) throws SQLException, CustomerDoesNotExistException {
+		new SetCustomerTroubleOppositeDB().execute(customer);
 	}
 }
