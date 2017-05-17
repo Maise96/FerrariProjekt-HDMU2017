@@ -1,5 +1,6 @@
 package presentationCreateCustomer;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import domain.Customer;
@@ -7,7 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentationCreditPlan.CreditPlanStage;
+import javafx.scene.input.MouseButton;
+import logic.InformationController;
 
 class CustomerTable extends TableView<Customer>{
 TableColumn<Customer,String> nameCol;
@@ -16,23 +18,24 @@ TableColumn<Customer,Long> cprCol;
 	CustomerTableRefresh.tilmeld(this);
 
 	
-	nameCol = new TableColumn<Customer,String>("Navn");
+	TableColumn<Customer,String>nameCol = new TableColumn<Customer,String>("Navn");
 	nameCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("name"));
 	
-	cprCol = new TableColumn<Customer,Long>("CprNr");
-	cprCol.setCellValueFactory(new PropertyValueFactory<Customer,Long>("cprNr"));
+	TableColumn<Customer,String>cprCol = new TableColumn<Customer,String>("CprNr");
+	cprCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("cprNr"));
 	
 	TableColumn<Customer,Boolean> troubleCol = new TableColumn<Customer,Boolean>("Trouble");
 	troubleCol.setCellValueFactory(new PropertyValueFactory<Customer,Boolean>("trouble"));
+	
 	
 	this.getColumns().setAll(nameCol,cprCol,troubleCol);
 	this.autosize();
 	this.setPrefSize(250, 300);
 	this.setMaxSize(300, 300);
 	this.setOnMouseClicked(m->{
-		if(m.getClickCount()>=2 && this.getSelectionModel().getSelectedItem()!=null){
-			new CreditPlanStage(this.getSelectionModel().getSelectedItem());
-		}
+		if(m.getButton().equals(MouseButton.SECONDARY) && this.getSelectionModel().getSelectedItem()!=null){
+			this.setContextMenu(new RightClickMenu(this.getSelectionModel().getSelectedItem()));
+			}
 	});
 	
 	}

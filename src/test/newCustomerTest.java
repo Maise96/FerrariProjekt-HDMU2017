@@ -76,7 +76,8 @@ public class newCustomerTest {
 	}
 
 	@Test(expected = CustomerAlreadyExistException.class)
-	public void customerAlreadyExistTest() throws CustomerAlreadyExistException, SQLException {
+	public void customerAlreadyExistTest()
+			throws CustomerAlreadyExistException, SQLException, CustomerDoesNotExistException {
 		Customer testCustomer = new Customer("uniqueName", "0703942881", false);
 		db db = new db();
 		db.insetCustomer(testCustomer);
@@ -86,12 +87,8 @@ public class newCustomerTest {
 		} catch (IllegalNameException | IllegalCprException | SQLException e) {
 			fail("not legit customer or db connection failure");
 		} catch (CustomerAlreadyExistException e) {
-			throw new CustomerAlreadyExistException(testCustomer);
-		}
-		try {
 			db.deleteCustomer(testCustomer);
-		} catch (CustomerDoesNotExistException e) {
-			fail("couldn't delete customer");
+			throw new CustomerAlreadyExistException(testCustomer);
 		}
 
 	}

@@ -23,7 +23,9 @@ private Boolean trouble;
 	public Boolean getTrouble() {
 		return trouble;
 	}
-	
+	public void setTrouble(Boolean trouble){
+		this.trouble = trouble;
+	}
 	@Override
 	public String toString(){
 		return name + " " + cprNr;

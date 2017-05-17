@@ -21,21 +21,9 @@ public class InformationController {
 
 	public void newCustomer(String name, String cprNr)
 			throws IllegalNameException, IllegalCprException, SQLException, CustomerAlreadyExistException {
-
-		Customer customer = new DomainFactory().newCustomer(name, cprNr);
-		if (name.isEmpty() || new InputKontrol().illegalName(name))
-			throw new IllegalNameException(name);
-		if (!new CprControl(cprNr).getResult())
-			throw new IllegalCprException(cprNr);
-		try{
-		if (searchResult.contains(customer))
-			throw new CustomerAlreadyExistException(customer);
-		}
-		catch(NullPointerException e){
-			if(!searchCustomers(customer.getName(),customer.getCprNr()).isEmpty())
-				throw new CustomerAlreadyExistException(customer);
-		}
+		Customer customer = new ExceptionControl().newCustomer(name,cprNr,searchResult);
 		new DataBaseFacade().insetCustomer(customer);
+		
 	}
 
 	public List<Customer> searchCustomers(String navn, String cpr) throws SQLException {
@@ -58,14 +46,7 @@ public class InformationController {
 		return new CreditPlanCalculator().calculateNewCreditPlan(amount, downPayment, customerRate);
 	}
 	public void deleteCustomer(Customer customer)throws SQLException,CustomerDoesNotExistException{
-		if(searchResult!=null){
-			if(!searchResult.contains(customer))
-				throw new CustomerDoesNotExistException(customer);
-		}
-		else if(searchResult == null){	
-		if(!searchCustomers(customer.getName(),customer.getCprNr()).contains(customer))
-			throw new CustomerDoesNotExistException(customer);
-		}
+		new ExceptionControl().deleteCustomer(customer,searchResult);;
 		new DataBaseFacade().deleteCustomer(customer);
 	}
 }
