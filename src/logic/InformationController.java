@@ -9,21 +9,19 @@ import domain.BankRate;
 import domain.CreditAssesment;
 import domain.CreditPlan;
 import domain.Customer;
-import domain.DomainFactory;
 import exceptions.CustomerAlreadyExistException;
 import exceptions.CustomerDoesNotExistException;
 import exceptions.IllegalCprException;
 import exceptions.IllegalNameException;
-import utill.InputKontrol;
 
 public class InformationController {
 	List<Customer> searchResult;
 
 	public void newCustomer(String name, String cprNr)
 			throws IllegalNameException, IllegalCprException, SQLException, CustomerAlreadyExistException {
-		Customer customer = new ExceptionControl().newCustomer(name,cprNr,searchResult);
+		Customer customer = new ExceptionControl().newCustomer(name, cprNr, searchResult);
 		new DataBaseFacade().insetCustomer(customer);
-		
+
 	}
 
 	public List<Customer> searchCustomers(String navn, String cpr) throws SQLException {
@@ -45,8 +43,13 @@ public class InformationController {
 	public CreditPlan newCreditPlan(BigDecimal amount, BigDecimal downPayment, double customerRate) {
 		return new CreditPlanCalculator().calculateNewCreditPlan(amount, downPayment, customerRate);
 	}
-	public void deleteCustomer(Customer customer)throws SQLException,CustomerDoesNotExistException{
-		new ExceptionControl().deleteCustomer(customer,searchResult);;
+
+	public void deleteCustomer(Customer customer) throws SQLException, CustomerDoesNotExistException {
+		new ExceptionControl().deleteCustomer(customer, searchResult);
 		new DataBaseFacade().deleteCustomer(customer);
+	}
+
+	public void switchTrobleState(Customer customer) throws SQLException, CustomerDoesNotExistException {
+		new DataBaseFacade().switchTrobleState(customer);
 	}
 }
