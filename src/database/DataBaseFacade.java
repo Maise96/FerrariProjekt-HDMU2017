@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import domain.Customer;
+import exceptions.CustomerDoesNotExistException;
 
 public class DataBaseFacade {
 
@@ -13,5 +14,8 @@ public class DataBaseFacade {
 
 	public List<Customer> searchCustomers(String navn,String cpr) {
 		return new SearchCustomersDB().execute(navn,cpr);
+	}
+	public void deleteCustomer(Customer customer)throws CustomerDoesNotExistException{
+		
 	}
 }

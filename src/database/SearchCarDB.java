@@ -10,7 +10,7 @@ import java.util.List;
 import domain.Car;
 import exceptions.ErrorMessage;
 
-public class SearchCarDB extends DBAccess {
+class SearchCarDB extends DBAccess {
 	List<Car> execute(BigDecimal price, String model, Boolean Avaible) {
 		List<Car> cars = new ArrayList<Car>();
 		try {

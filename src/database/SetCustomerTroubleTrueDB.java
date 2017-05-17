@@ -1,5 +1,5 @@
 package database;
 
-public class SetCustomerTroubleTrueDB extends DBAccess {
+class SetCustomerTroubleTrueDB extends DBAccess {
 
 }

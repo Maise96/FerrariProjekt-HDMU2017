@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ErrorLogger {
-	public ErrorLogger(Exception e){
+	public ErrorLogger(Exception e,String message){
 		try {
 			String errorLog = "";
 			errorLog += e.toString() + "\n";
 			errorLog += "at: " + LocalDate.now().toString() + LocalTime.now(Clock.systemUTC())+ "\n";
-			
+			errorLog += "message from programmer: " + message;
 			StackTraceElement[] st = e.getStackTrace();
 			for(int i = 0; i<st.length;i++){
 				errorLog+=(st[i].toString() + "\n");

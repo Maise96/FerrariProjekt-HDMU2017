@@ -9,7 +9,7 @@ import java.util.List;
 import domain.Salesman;
 import exceptions.ErrorMessage;
 
-public class SearchSalesmenDB extends DBAccess {
+class SearchSalesmenDB extends DBAccess {
 	List<Salesman> execute(String name) {
 		List<Salesman> salesmen = new ArrayList<Salesman>();
 		try {

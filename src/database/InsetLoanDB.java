@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import domain.Loan;
 
-public class InsetLoanDB extends DBAccess {
+class InsetLoanDB extends DBAccess {
 	void execute(Loan loan) throws SQLException {
 		connect();
 		PreparedStatement statement = prepareStatement("INSERT INTO ISSUEDLOANS (AMOUNT, INTERESTRATE, CUSTOMERID, SALESMANIS, ESTIMATEDENDDATE) VALUES(?,?,?,?,?)");

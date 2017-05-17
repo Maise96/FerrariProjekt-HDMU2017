@@ -1,5 +1,5 @@
 package database;
 
-public class SetCarAvaibleFalseDB extends DBAccess{
+class SetCarAvaibleFalseDB extends DBAccess{
 
 }

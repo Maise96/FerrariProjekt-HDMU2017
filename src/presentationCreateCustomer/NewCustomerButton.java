@@ -2,6 +2,7 @@ package presentationCreateCustomer;
 
 import java.sql.SQLException;
 
+import exceptions.CustomerAlreadyExistException;
 import exceptions.ErrorMessage;
 import exceptions.IllegalCprException;
 import exceptions.IllegalNameException;
@@ -35,7 +36,10 @@ class NewCustomerButton extends Button {
 			new ErrorMessage("Illegal Cpr");
 		} catch (SQLException e1) {
 			new ErrorMessage("Connection to database failed");
-			e1.printStackTrace();
+		}
+		catch(CustomerAlreadyExistException e){
+			new ErrorMessage("customer already exist");
+			
 		}
 
 	}

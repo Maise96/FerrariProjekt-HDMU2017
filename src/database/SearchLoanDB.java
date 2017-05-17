@@ -9,7 +9,7 @@ import java.util.List;
 import domain.Loan;
 import exceptions.ErrorMessage;
 
-public class SearchLoanDB extends DBAccess {
+class SearchLoanDB extends DBAccess {
 	List<Loan> execute(int customerID, int salesmanID) {
 		List<Loan> loans = new ArrayList<Loan>();
 		try {

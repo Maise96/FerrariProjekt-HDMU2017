@@ -39,5 +39,4 @@ public class CprControlTest {
 		CprControl control = new CprControl("3013942881");
 		assertFalse(control.getResult());
 	}
-	
 }

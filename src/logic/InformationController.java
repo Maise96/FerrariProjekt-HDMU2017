@@ -10,33 +10,38 @@ import domain.CreditAssesment;
 import domain.CreditPlan;
 import domain.Customer;
 import domain.DomainFactory;
+import exceptions.CustomerAlreadyExistException;
 import exceptions.IllegalCprException;
 import exceptions.IllegalNameException;
 import utill.InputKontrol;
 
 public class InformationController {
+	List<Customer> searchResult;
 
-	public void newCustomer(String name, String cprNr) throws IllegalNameException, IllegalCprException, SQLException {
-		if (name.isEmpty() || new InputKontrol().illegalName(name)) {
-			throw new IllegalNameException();
-		}
+	public void newCustomer(String name, String cprNr)
+			throws IllegalNameException, IllegalCprException, SQLException, CustomerAlreadyExistException {
 
-		if (!new CprControl(cprNr).getResult()) {
-			throw new IllegalCprException();
-		}
 		Customer customer = new DomainFactory().newCustomer(name, cprNr);
+		if (name.isEmpty() || new InputKontrol().illegalName(name))
+			throw new IllegalNameException();
+		if (!new CprControl(cprNr).getResult())
+			throw new IllegalCprException();
+		if (searchResult.contains(customer))
+			throw new CustomerAlreadyExistException();
 		new DataBaseFacade().insetCustomer(customer);
 	}
 
 	public List<Customer> searchCustomers(String navn, String cpr) throws SQLException {
-		return new DataBaseFacade().searchCustomers(navn, cpr);
+		searchResult = new DataBaseFacade().searchCustomers(navn, cpr);
+		return searchResult;
 	}
 
 	public void updateBankRate() {
 		new BankRate().update();
 	}
 
-	public CreditAssesment newCreditAssesment(Customer customer)/* throws BadCustomerException */ {
+	public CreditAssesment newCreditAssesment(
+			Customer customer)/* throws BadCustomerException */ {
 		CreditAssesment creditAssesment = new CreditAssesment();
 		creditAssesment = new CreditAssesmentCalculator().newCreditAssesment(customer, new CreditAssesment());
 		return creditAssesment;
