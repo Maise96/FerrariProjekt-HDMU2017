@@ -11,6 +11,7 @@ import domain.CreditPlan;
 import domain.Customer;
 import domain.DomainFactory;
 import exceptions.CustomerAlreadyExistException;
+import exceptions.CustomerDoesNotExistException;
 import exceptions.IllegalCprException;
 import exceptions.IllegalNameException;
 import utill.InputKontrol;
@@ -23,11 +24,17 @@ public class InformationController {
 
 		Customer customer = new DomainFactory().newCustomer(name, cprNr);
 		if (name.isEmpty() || new InputKontrol().illegalName(name))
-			throw new IllegalNameException();
+			throw new IllegalNameException(name);
 		if (!new CprControl(cprNr).getResult())
-			throw new IllegalCprException();
+			throw new IllegalCprException(cprNr);
+		try{
 		if (searchResult.contains(customer))
-			throw new CustomerAlreadyExistException();
+			throw new CustomerAlreadyExistException(customer);
+		}
+		catch(NullPointerException e){
+			if(!searchCustomers(customer.getName(),customer.getCprNr()).isEmpty())
+				throw new CustomerAlreadyExistException(customer);
+		}
 		new DataBaseFacade().insetCustomer(customer);
 	}
 
@@ -49,5 +56,16 @@ public class InformationController {
 
 	public CreditPlan newCreditPlan(BigDecimal amount, BigDecimal downPayment, double customerRate) {
 		return new CreditPlanCalculator().calculateNewCreditPlan(amount, downPayment, customerRate);
+	}
+	public void deleteCustomer(Customer customer)throws SQLException,CustomerDoesNotExistException{
+		if(searchResult!=null){
+			if(!searchResult.contains(customer))
+				throw new CustomerDoesNotExistException(customer);
+		}
+		else if(searchResult == null){	
+		if(!searchCustomers(customer.getName(),customer.getCprNr()).contains(customer))
+			throw new CustomerDoesNotExistException(customer);
+		}
+		new DataBaseFacade().deleteCustomer(customer);
 	}
 }

@@ -22,11 +22,13 @@ TableColumn<Customer,Long> cprCol;
 	cprCol = new TableColumn<Customer,Long>("CprNr");
 	cprCol.setCellValueFactory(new PropertyValueFactory<Customer,Long>("cprNr"));
 	
-	this.getColumns().setAll(nameCol,cprCol);
-	this.autosize();
-	this.setPrefSize(150, 300);
-	this.setMaxSize(200, 300);
+	TableColumn<Customer,Boolean> troubleCol = new TableColumn<Customer,Boolean>("Trouble");
+	troubleCol.setCellValueFactory(new PropertyValueFactory<Customer,Boolean>("trouble"));
 	
+	this.getColumns().setAll(nameCol,cprCol,troubleCol);
+	this.autosize();
+	this.setPrefSize(250, 300);
+	this.setMaxSize(300, 300);
 	this.setOnMouseClicked(m->{
 		if(m.getClickCount()>=2 && this.getSelectionModel().getSelectedItem()!=null){
 			new CreditPlanStage(this.getSelectionModel().getSelectedItem());
@@ -35,7 +37,6 @@ TableColumn<Customer,Long> cprCol;
 	
 	}
 	public CustomerTable refreshTable(List<Customer> customers){
-		System.out.println(customers);	
 		this.setItems(FXCollections.observableArrayList(customers));
 		this.refresh();
 		return this;

@@ -15,7 +15,7 @@ public class DataBaseFacade {
 	public List<Customer> searchCustomers(String navn,String cpr) {
 		return new SearchCustomersDB().execute(navn,cpr);
 	}
-	public void deleteCustomer(Customer customer)throws CustomerDoesNotExistException{
-		
+	public void deleteCustomer(Customer customer)throws CustomerDoesNotExistException,SQLException{
+		new DeleteCustomerDB().execute(customer);
 	}
 }

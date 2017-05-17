@@ -1,9 +1,6 @@
 package domain;
 
-import com.ferrari.finances.dk.rki.CreditRator;
 import com.ferrari.finances.dk.rki.Rating;
-
-import exceptions.BadCustomerException;
 
 public class CreditAssesment {
 	double customerRate;
