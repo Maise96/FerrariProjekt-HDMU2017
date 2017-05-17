@@ -10,10 +10,6 @@ import exceptions.BadCustomerException;
 
 class CreditAssesmentCalculator {
 	CreditAssesment newCreditAssesment(Customer customer,CreditAssesment creditAssesment)/*throws BadCustomerException*/{
-		CreditRatorThread ratingThread = new CreditRatorThread();
-		ratingThread.setCreditAssesment(creditAssesment);
-		ratingThread.setCustomer(customer);
-		ratingThread.start();
 		double customerRate = BankRate.rate;
 		switch(CreditRator.i().rate(customer.getCprNr())){
 		case A:

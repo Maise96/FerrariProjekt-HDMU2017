@@ -49,7 +49,7 @@ public class InformationController {
 		new DataBaseFacade().deleteCustomer(customer);
 	}
 
-	public void switchTrobleState(Customer customer) throws SQLException, CustomerDoesNotExistException {
-		new DataBaseFacade().switchTrobleState(customer);
+	public void switchTroubleState(Customer customer) throws SQLException, CustomerDoesNotExistException {
+		new DataBaseFacade().switchTroubleState(customer);
 	}
 }

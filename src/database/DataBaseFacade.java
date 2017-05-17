@@ -20,7 +20,7 @@ public class DataBaseFacade {
 		new DeleteCustomerDB().execute(customer);
 	}
 
-	public void switchTrobleState(Customer customer) throws SQLException, CustomerDoesNotExistException {
+	public void switchTroubleState(Customer customer) throws SQLException, CustomerDoesNotExistException {
 		new SetCustomerTroubleOppositeDB().execute(customer);
 	}
 }

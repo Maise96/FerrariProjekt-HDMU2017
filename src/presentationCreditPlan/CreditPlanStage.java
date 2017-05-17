@@ -1,9 +1,7 @@
 package presentationCreditPlan;
 
-import domain.CreditAssesment;
 import domain.CreditPlan;
 import domain.Customer;
-import exceptions.BadCustomerException;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +11,7 @@ import logic.InformationController;
 
 public class CreditPlanStage extends  Stage{
 CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
+CreditAssesmentGrid creditGrid;
 	public CreditPlanStage(Customer customer){ //TODO Sæt det hele pænt op.
 		this.setTitle("Ferrari Regional Software Inc.");
 		BorderPane root = new BorderPane();
@@ -32,18 +31,26 @@ CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
 		amountGrid.getObserver().assignStage(this);
 		root.setTop(utill);
 		
-		/*try {*/
-		CreditAssesmentGrid creditGrid = new CreditAssesmentGrid(new InformationController().newCreditAssesment(customer));
+		
+		creditGrid = new CreditAssesmentGrid(new InformationController().newCreditAssesment(customer));
 		creditGrid.setObserver(amountGrid.getObserver());
-		root.setLeft(creditGrid); //fejl her, indtil videre.
-		/*} catch (BadCustomerException e) {
-			
-		}*/
+		
+/*		CreditAssesmentThread creditAssesmentThread = new CreditAssesmentThread(creditGrid);
+		creditAssesmentThread.setCustomer(customer);
+		creditAssesmentThread.start();*/
+		
+		
+		root.setLeft(creditGrid); 
 		root.setBottom(overview);
 		root.setRight(amountGrid);
-		this.show();
 	}
 	void setOverview(CreditPlanOverview creditPlanOverview){
 		this.overview = creditPlanOverview;
+	}
+	public CreditAssesmentGrid getCreditAssesmentGrid(){
+		return creditGrid;
+	}
+	public void start(){
+		this.show();
 	}
 }
