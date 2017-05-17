@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import exceptions.ErrorMessage;
 
-public class cprKryptering {
+class cprKryptering {
 	long cprNr;
 	BigDecimal nøgle = new BigDecimal("120356148756120397845661032487561092743");
 

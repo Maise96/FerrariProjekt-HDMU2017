@@ -2,9 +2,7 @@ package launch;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import logic.CreditPlanCalculator;
 import presentationCreateCustomer.PrimaryStage;
-import presentationCreditPlan.CreditPlanStage;
 
 
 public class Main extends Application {

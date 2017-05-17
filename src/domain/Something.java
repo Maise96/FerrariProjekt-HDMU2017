@@ -1,5 +1,7 @@
 package domain;
 
-public class Something extends Nothing{
+import java.util.ArrayList;
+
+public class Something extends ArrayList<Nothing>{
 
 }

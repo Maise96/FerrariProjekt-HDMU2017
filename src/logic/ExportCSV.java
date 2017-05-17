@@ -7,11 +7,11 @@ import domain.Something;
 import javafx.stage.FileChooser;
 
 
-public class ExportCSV 
+class ExportCSV 
 {
-	public void exportCSV (Something something)
+	void exportCSV (Something something)
 	{
-		try
+		/*		try
 		{
 
 			 FileChooser fileChooser = new FileChooser();
@@ -32,6 +32,6 @@ public class ExportCSV
 		} catch (EOFException e) {
 			throw e;
 		}
-			System.out.println("CSV export done.");
+		*/	System.out.println("CSV export done.");
 	}
 }

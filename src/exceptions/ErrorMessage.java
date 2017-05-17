@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,6 +33,14 @@ public class ErrorMessage extends Stage {
 				if(k.getCode().equals(KeyCode.ESCAPE)){
 					this.close();
 				}
+			});
+			Button logButton = new Button("show log");
+			logButton.setOnMousePressed(e->{
+				Stage logStage = new Stage();
+				BorderPane root = new BorderPane();
+				Scene utill = new Scene(root);
+				
+				logStage.setScene(utill);
 			});
 			this.show();
 //

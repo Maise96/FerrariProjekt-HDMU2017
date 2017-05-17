@@ -6,13 +6,13 @@ import exceptions.ErrorMessage;
 import exceptions.IllegalCprException;
 import exceptions.IllegalNameException;
 import javafx.scene.control.Button;
-import logic.InformationExpert;
+import logic.InformationController;
 
 class NewCustomerButton extends Button {
 	NameTextField name;
 	CprTextField cprNr;
 
-	public NewCustomerButton(NameTextField name, CprTextField cprNr,NewCustomerObserver observer) {
+	public NewCustomerButton(NameTextField name, CprTextField cprNr, NewCustomerObserver observer) {
 		this.setText("Save Customer");
 		this.setPrefSize(125, 75);
 		this.name = name;
@@ -20,28 +20,24 @@ class NewCustomerButton extends Button {
 		this.setDisable(true);
 		observer.assignButton(this);
 		this.setOnMouseClicked(e -> {
-			try{
-				new InformationExpert().newCustomer(name.getText(), cprNr.getText() );
-				}
-			catch(IllegalNameException e1){
-				new ErrorMessage("name can't be empty");
-			}
-			catch(IllegalCprException e2){
-				new ErrorMessage("Illegal Cpr");
-			}
-			catch (SQLException e1) {
-				new ErrorMessage("Connection to database failed");
-				e1.printStackTrace();
-			}
+			insetCustomerIntoDB(name, cprNr);
 			observer.check();
 		});
-		
+
 	}
 
-	public void insetCustomerIntoDB(NameTextField navn, CprTextField cprNr)
-			throws IllegalNameException, IllegalCprException {
-		
-	
+	public void insetCustomerIntoDB(NameTextField navn, CprTextField cprNr) {
+		try {
+			new InformationController().newCustomer(name.getText(), cprNr.getText());
+		} catch (IllegalNameException e1) {
+			new ErrorMessage("illegal name");
+		} catch (IllegalCprException e2) {
+			new ErrorMessage("Illegal Cpr");
+		} catch (SQLException e1) {
+			new ErrorMessage("Connection to database failed");
+			e1.printStackTrace();
+		}
+
 	}
 
 }

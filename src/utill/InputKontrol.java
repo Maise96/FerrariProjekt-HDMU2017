@@ -47,4 +47,13 @@ public class InputKontrol {
 			updateTextField(text, s);
 		}
 	}
+	public boolean illegalName(String text){
+		for (int i = 0; i < text.length(); i++) {
+			String checkLetter = text.substring(i, i + 1);
+			if (!erBogstav(checkLetter)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

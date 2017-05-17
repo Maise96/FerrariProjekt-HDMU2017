@@ -1,11 +1,10 @@
 package launch;
 
-import logic.InformationExpert;
+import logic.InformationController;
 import presentationCreditPlan.CreditPlanStage;
 
 class UpdateInterestRate extends Thread{
 	public void run(){
-		new InformationExpert().updateBankRate();
-		
+		new InformationController().updateBankRate();
 	}
 }

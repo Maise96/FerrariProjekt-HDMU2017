@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import logic.InformationExpert;
+import logic.InformationController;
 
 public class PrimaryStage extends Stage {
 	BorderPane root;
@@ -44,7 +44,7 @@ public class PrimaryStage extends Stage {
 		kundeTable = new CustomerTable();
 		new CustomerTableRefresh(this);
 		try {
-			kundeTable.refreshTable(new InformationExpert().searchCustomers("", ""));
+			kundeTable.refreshTable(new InformationController().searchCustomers("", ""));
 		} catch (SQLException e) {
 			new ErrorMessage("Initial setup of Customer Table went wrong");
 			e.printStackTrace();

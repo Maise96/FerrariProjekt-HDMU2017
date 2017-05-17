@@ -2,7 +2,7 @@ package presentationCreateCustomer;
 
 import java.sql.SQLException;
 
-import logic.InformationExpert;
+import logic.InformationController;
 
 public class NewCustomerObserver {
 	CprTextField cprNr;

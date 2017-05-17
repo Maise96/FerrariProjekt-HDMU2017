@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import logic.InformationExpert;
+import logic.InformationController;
 
 public class CreditPlanStage extends  Stage{
 CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
@@ -33,7 +33,7 @@ CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
 		root.setTop(utill);
 		
 		/*try {*/
-		CreditAssesmentGrid creditGrid = new CreditAssesmentGrid(new InformationExpert().newCreditAssesment(customer));
+		CreditAssesmentGrid creditGrid = new CreditAssesmentGrid(new InformationController().newCreditAssesment(customer));
 		creditGrid.setObserver(amountGrid.getObserver());
 		root.setLeft(creditGrid); //fejl her, indtil videre.
 		/*} catch (BadCustomerException e) {

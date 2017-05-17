@@ -9,38 +9,40 @@ import domain.BankRate;
 import domain.CreditAssesment;
 import domain.CreditPlan;
 import domain.Customer;
-import exceptions.BadCustomerException;
+import domain.DomainFactory;
 import exceptions.IllegalCprException;
 import exceptions.IllegalNameException;
+import utill.InputKontrol;
 
-public class InformationExpert {
-	
-	public void newCustomer(String name, String cprNr)throws IllegalNameException, IllegalCprException,SQLException{
-		if (name.isEmpty()) 
+public class InformationController {
+
+	public void newCustomer(String name, String cprNr) throws IllegalNameException, IllegalCprException, SQLException {
+		if (name.isEmpty() || new InputKontrol().illegalName(name)) {
 			throw new IllegalNameException();
-		
-		if(cprNr.length()!=10)
+		}
+
+		if (!new CprControl(cprNr).getResult()) {
 			throw new IllegalCprException();
-		
+		}
 		Customer customer = new DomainFactory().newCustomer(name, cprNr);
-		
 		new DataBaseFacade().insetCustomer(customer);
-	
-	
 	}
-	
-	public List<Customer> searchCustomers(String navn, String cpr)throws SQLException{
-		return new DataBaseFacade().searchCustomers(navn,cpr);
+
+	public List<Customer> searchCustomers(String navn, String cpr) throws SQLException {
+		return new DataBaseFacade().searchCustomers(navn, cpr);
 	}
-	public void updateBankRate(){
+
+	public void updateBankRate() {
 		new BankRate().update();
 	}
-	public CreditAssesment newCreditAssesment(Customer customer)/*throws BadCustomerException*/{
+
+	public CreditAssesment newCreditAssesment(Customer customer)/* throws BadCustomerException */ {
 		CreditAssesment creditAssesment = new CreditAssesment();
 		creditAssesment = new CreditAssesmentCalculator().newCreditAssesment(customer, new CreditAssesment());
 		return creditAssesment;
 	}
-	public CreditPlan newCreditPlan(BigDecimal amount,BigDecimal downPayment, double customerRate){
+
+	public CreditPlan newCreditPlan(BigDecimal amount, BigDecimal downPayment, double customerRate) {
 		return new CreditPlanCalculator().calculateNewCreditPlan(amount, downPayment, customerRate);
 	}
 }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import domain.BankRate;
 import javafx.scene.control.TextField;
-import logic.InformationExpert;
+import logic.InformationController;
 
 class CreditPlanObserver {
 	TextField amount;
@@ -37,7 +37,7 @@ class CreditPlanObserver {
 		grid.update();
 		if(downPayment!=0) // laver en ny creditPlan og updatere overview
 		creditPlanStage.setOverview(
-				overview.update(new InformationExpert().newCreditPlan(BigDecimal.valueOf(amount),
+				overview.update(new InformationController().newCreditPlan(BigDecimal.valueOf(amount),
 						BigDecimal.valueOf(downPayment), Double.parseDouble(grid.getCustomerRate()))));
 	}
 

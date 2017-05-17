@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import domain.CreditPlan;
 import domain.Payment;
 
-public class CreditPlanCalculator {
+class CreditPlanCalculator {
 	
 	public CreditPlan calculateNewCreditPlan(BigDecimal amount, BigDecimal downPayment, double customerRate){
 		BigDecimal BDCustomerRate = BigDecimal.valueOf(customerRate)
