@@ -27,6 +27,7 @@ class RightClickMenu extends ContextMenu{
 			catch(NullPointerException n){
 			}
 			CustomerTableRefresh.refresh(customers);
+			
 		});
 		MenuItem creditPlan = new MenuItem("issue loan");
 		creditPlan.setOnAction(e->{
