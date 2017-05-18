@@ -14,12 +14,18 @@ class CreditPlanObserver {
 	CreditPlanStage creditPlanStage;
 	boolean ekstraProcent = false;
 	boolean ekstraProcent2 = false;
-	
+	double amount = 0;
+	double downPayment = 0;
+	double newCustomerRate = 0;
 	void update() { // håndtere hvis der skal ligges 1% procent til kundens
 					// rente.
-		double amount = 0;
-		double downPayment = 0;
-		double newCustomerRate = Double.parseDouble(grid.getCustomerRate());
+		newCustomerRate = Double.parseDouble(grid.getCustomerRate());
+		isDownpaymentLessThenHalfOfAmount();
+		updateCreditPlanTable();
+		grid.setCustomerRate(Double.toString(newCustomerRate));
+		grid.update();
+	}
+	void isDownpaymentLessThenHalfOfAmount(){
 		if (!this.amountTextField.getText().isEmpty())
 			amount = Double.parseDouble(this.amountTextField.getText());
 
@@ -33,9 +39,8 @@ class CreditPlanObserver {
 			ekstraProcent = false;
 			newCustomerRate--;
 		}
-		
-		
-		
+	}
+	void updateCreditPlanTable(){
 		if(downPayment!=0){ // laver en ny creditPlan og updatere overview
 			CreditPlan creditPlan = new InformationController().newCreditPlan(BigDecimal.valueOf(amount),
 					BigDecimal.valueOf(downPayment), Double.parseDouble(grid.getCustomerRate()));
@@ -49,8 +54,6 @@ class CreditPlanObserver {
 			creditPlanStage.setOverview(
 				overview.update(creditPlan));
 		}
-		grid.setCustomerRate(Double.toString(newCustomerRate));
-		grid.update();
 	}
 	
 	void assignAmountTextField(TextField amount) {

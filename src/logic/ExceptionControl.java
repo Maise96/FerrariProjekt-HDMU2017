@@ -36,7 +36,7 @@ class ExceptionControl {
 				throw new CustomerDoesNotExistException(customer);
 		}
 		else if(searchResult == null){	
-		if(!new InformationController().searchCustomers(customer.getName(),customer.getCprNr()).isEmpty())
+		if(new InformationController().searchCustomers(customer.getName(),customer.getCprNr()).isEmpty())
 			throw new CustomerDoesNotExistException(customer);
 		}
 	}
