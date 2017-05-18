@@ -4,7 +4,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.sql.DriverManager;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.junit.Test;
@@ -69,29 +72,48 @@ public class DBTest {
 	}
 
 	@Test(expected = SQLException.class)
-	public void testSQLException() throws SQLException {
+	public void testSQLExceptionConnect() throws SQLException {
 		DBAccessMock dbAccess = new DBAccessMock();
 		dbAccess.url = "";
 		dbAccess.connect();
 
 	}
 
+	@Test
+	public void testDBLogger() {
+		try {
+			new DBLogger("test", new InsetCustomerDB());
+		} catch (IOException e) {
+			fail("IOException");
+		}
+
+	}
+
+	@Test
+	public void testDBLoggerException() throws IOException {
+		for (int i = 0; i < 10; i++) {
+			new IOExceptionGenerator();
+		}
+	}
+	
+
 	@Test(expected = SQLException.class)
-	public void testSQLException2() throws SQLException {
+	public void testSQLExceptionDisConnect() throws SQLException {
 		DBAccessMock dbAccess = new DBAccessMock();
 		dbAccess.connect();
-		dbAccess.prepareStatement("INSERT INTO CUSTOMERS (NAME,CPR,TROUBLE) values(testShouldntBeHere,0703942881,true").execute();
+		dbAccess.prepareStatement("INSERT INTO CUSTOMERS (NAME,CPR,TROUBLE) values(testShouldntBeHere,0703942881,true")
+				.execute();
 		dbAccess.url = "";
 		dbAccess.disConnect();
 	}
 
 	@Test(expected = SQLException.class)
-	public void testSQLException3() throws SQLException {
+	public void testSQLExceptionPrepareStatement() throws SQLException {
 		DBAccessMock dbAccess = new DBAccessMock();
 		dbAccess.connect();
 		dbAccess.url = "";
 		dbAccess.prepareStatement("wtf");
-}
+	}
 
 	private class db extends DataBaseFacade {
 
@@ -110,5 +132,31 @@ public class DBTest {
 	}
 
 	private class DBAccessMock extends DBAccess {
+	}
+
+	private class IOExceptionGenerator extends Thread {
+
+		public IOExceptionGenerator() throws IOException {
+			generateException();
+			System.out.println("thread started: " + this.getName());
+		}
+
+		void generateException() throws IOException {
+			try {
+				for (int i = 0; i < 10; i++) {
+					new DBLogger("test", new InsetCustomerDB());
+					i++;
+					Thread.sleep(2);
+					
+					BufferedReader br = new BufferedReader(new FileReader("database log"));
+					while (br.ready()) {
+						br.readLine();
+					}
+					br.close();
+					Thread.sleep(2);
+				}
+			} catch (InterruptedException | FileNotFoundException e) {
+			}
+		}
 	}
 }
