@@ -31,7 +31,6 @@ CreditAssesmentGrid creditGrid;
 		amountGrid.getObserver().assignStage(this);
 		root.setTop(utill);
 		
-		
 		creditGrid = new CreditAssesmentGrid();
 		creditGrid.setObserver(amountGrid.getObserver());
 		

@@ -18,11 +18,11 @@ CreditAssesmentGrid grid;
 	}
 	public void run(){
 		System.out.println("assesmentThread started");
-		grid.setCreditRating("waiting for rki");
 		creditAssesment.setCreditRating(CreditRator.i().rate(customer.getCprNr()));
 		creditAssesment.setInterestRate(BankRate.rate);
 		creditAssesment.setCustomerRate(new InformationController().newCustomerRate(customer, creditAssesment));
 		grid.setCreditAssesment(creditAssesment);
+		System.out.println("done");
 	}
 
 }

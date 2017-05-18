@@ -42,7 +42,7 @@ class RightClickMenu extends ContextMenu {
 
 		MenuItem creditPlan = new MenuItem("issue loan");
 		creditPlan.setOnAction(e -> {
-			new CreditPlanStage(customer).start();
+			creditPlanStage.show();
 		});
 
 		MenuItem delete = new MenuItem("delete");
