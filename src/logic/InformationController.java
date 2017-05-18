@@ -20,8 +20,10 @@ public class InformationController {
 	public void newCustomer(String name, String cprNr)
 			throws IllegalNameException, IllegalCprException, SQLException, CustomerAlreadyExistException {
 		Customer customer = new ExceptionControl().newCustomer(name, cprNr, searchResult);
+		
 		new DataBaseFacade().insetCustomer(customer);
 
+		
 	}
 
 	public List<Customer> searchCustomers(String navn, String cpr) throws SQLException {
