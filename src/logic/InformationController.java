@@ -33,14 +33,17 @@ public class InformationController {
 		new BankRate().update();
 	}
 
-	public double newCustomerRate(
-			Customer customer,CreditAssesment creditAssesment)/* throws BadCustomerException */ {
+	public double newCustomerRate(Customer customer,
+			CreditAssesment creditAssesment)/* throws BadCustomerException */ {
 		creditAssesment = new CreditAssesmentCalculator().newCreditAssesment(customer, creditAssesment);
 		return creditAssesment.getCustomerRate();
 	}
 
 	public CreditPlan newCreditPlan(BigDecimal amount, BigDecimal downPayment, double customerRate) {
-		return new CreditPlanCalculator().calculateNewCreditPlan(amount, downPayment, customerRate);
+		CreditPlan creditPlan = new CreditPlanCalculator().calculateNewCreditPlan(amount, downPayment, customerRate);
+		if(creditPlan.size()>=36)
+			return new CreditPlanCalculator().calculateNewCreditPlan(amount, downPayment, customerRate+1);
+		return creditPlan;
 	}
 
 	public void deleteCustomer(Customer customer) throws SQLException, CustomerDoesNotExistException {
