@@ -16,7 +16,6 @@ class RightClickMenu extends ContextMenu {
 	RightClickMenu(Customer customer) {
 		MenuItem flagCustomer;
 		CreditPlanStage creditPlanStage = new CreditPlanStage(customer);
-		new CreditAssesmentThread(creditPlanStage.getCreditAssesmentGrid(),customer).start();;
 		
 		if (customer.getTrouble())
 			flagCustomer = new MenuItem("unflag customer");
@@ -42,7 +41,7 @@ class RightClickMenu extends ContextMenu {
 
 		MenuItem creditPlan = new MenuItem("issue loan");
 		creditPlan.setOnAction(e -> {
-			creditPlanStage.show();
+			creditPlanStage.start();
 		});
 
 		MenuItem delete = new MenuItem("delete");

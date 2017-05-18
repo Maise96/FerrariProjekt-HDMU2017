@@ -1,20 +1,27 @@
 package presentationCreditPlan;
 
+import domain.CreditAssesment;
 import domain.CreditPlan;
 import domain.Customer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import logic.InformationController;
+import threads.Sleeper;
 
-public class CreditPlanStage extends  Stage{
+public class CreditPlanStage extends  Stage implements Runnable{
 CreditPlanOverview overview = new CreditPlanOverview(new CreditPlan());
 CreditAssesmentGrid creditGrid;
+BorderPane root;
+AmountGrid amountGrid;
+CreditAssesmentThread thread;
 	public CreditPlanStage(Customer customer){ //TODO Sæt det hele pænt op.
+		thread = new CreditAssesmentThread(this,customer);
+		thread.start();
 		this.setTitle("Ferrari Regional Software Inc.");
-		BorderPane root = new BorderPane();
+		root = new BorderPane();
 		Scene scene = new Scene(root);
 		this.setHeight(600);
 		this.setWidth(450);
@@ -26,20 +33,20 @@ CreditAssesmentGrid creditGrid;
 		utill.setAlignment(Pos.CENTER);
 		
 		
-		AmountGrid amountGrid = new AmountGrid();
+		amountGrid = new AmountGrid();
 		overview.setObserver(amountGrid.getObserver());
 		amountGrid.getObserver().assignStage(this);
 		root.setTop(utill);
+
+		amountGrid.setDisable(true);	
 		
-		creditGrid = new CreditAssesmentGrid();
-		creditGrid.setObserver(amountGrid.getObserver());
 		
 /*		CreditAssesmentThread creditAssesmentThread = new CreditAssesmentThread(creditGrid);
 		creditAssesmentThread.setCustomer(customer);
 		creditAssesmentThread.start();*/
 		
 		
-		root.setLeft(creditGrid); 
+		root.setLeft(new Label("Waiting for RKI")); 
 		root.setBottom(overview);
 		root.setRight(amountGrid);
 	}
@@ -51,5 +58,24 @@ CreditAssesmentGrid creditGrid;
 	}
 	public void start(){
 		this.show();
+		run();
 	}
+
+	public void rkiResponse(CreditAssesment creditAssesment) {
+		creditGrid = new CreditAssesmentGrid(creditAssesment);
+		creditGrid.setObserver(amountGrid.getObserver());
+		root.setLeft(creditGrid);
+		amountGrid.setDisable(false);
+	}
+	@Override
+	public void run() {
+		
+		while(!thread.isDone())
+			Sleeper.nap();
+			
+		rkiResponse(thread.getCreditAssesment());
+	
+	}
+	
+	
 }

@@ -10,19 +10,26 @@ import logic.InformationController;
 public class CreditAssesmentThread extends Thread{
 CreditAssesment creditAssesment;
 Customer customer;
-CreditAssesmentGrid grid;
-	public CreditAssesmentThread(CreditAssesmentGrid grid,Customer customer){
+CreditPlanStage grid;
+boolean done;
+	public CreditAssesmentThread(CreditPlanStage grid,Customer customer){
 		creditAssesment = new CreditAssesment();
 		this.customer = customer;
 		this.grid = grid;
+		done = false;
 	}
 	public void run(){
 		System.out.println("assesmentThread started");
 		creditAssesment.setCreditRating(CreditRator.i().rate(customer.getCprNr()));
 		creditAssesment.setInterestRate(BankRate.rate);
 		creditAssesment.setCustomerRate(new InformationController().newCustomerRate(customer, creditAssesment));
-		grid.setCreditAssesment(creditAssesment);
+		done = true;
 		System.out.println("done");
 	}
-
+	CreditAssesment getCreditAssesment(){
+		return creditAssesment;
+	}
+	boolean isDone(){
+		return done;
+	}
 }

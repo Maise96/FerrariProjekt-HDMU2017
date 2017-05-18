@@ -14,11 +14,11 @@ class CreditAssesmentGrid extends GridPane {
 	private String customerRate;
 	CreditPlanObserver obs;
 
-	CreditAssesmentGrid() {
+	CreditAssesmentGrid(CreditAssesment creditAssesment) {
 		
 		interestRate = Double.toString(BankRate.rate);
-		creditRating = "waiting for rki";
-		customerRate = interestRate;
+		creditRating = creditAssesment.getCreditRating().toString();
+		customerRate = Double.toString(creditAssesment.getCustomerRate());
 		
 		interestRateLabel = new Label("bank rate : " + BankRate.rate);
 		creditRatingLabel = new Label("credit rating : " + creditRating);
@@ -61,13 +61,7 @@ class CreditAssesmentGrid extends GridPane {
 		customerRateLabel.setText("customer rate : " + format(customerRate));
 		System.out.println(interestRateLabel.getText() + " " + creditRatingLabel.getText() + " " + customerRateLabel.getText());
 	}
-	void newCreditAssesment(CreditAssesment assesment){
-		this.interestRate = Double.toString(assesment.getInterestRate());
-		this.creditRating = assesment.getCreditRating().toString();
-		this.customerRate = Double.toString(assesment.getCustomerRate());
-		System.out.println(interestRate + " " + creditRating + " " + customerRate);
-		update();
-	}
+
 	void setObserver(CreditPlanObserver obs) {
 		this.obs = obs;
 		obs.tilmeldCreditAssesmentGrid(this);
@@ -80,8 +74,6 @@ class CreditAssesmentGrid extends GridPane {
 		else
 			return s;
 	}
-	void setCreditAssesment(CreditAssesment assesment){
-		System.out.println("modtog creditAssesment");
-		newCreditAssesment(assesment);
-	}
+
+	
 }
