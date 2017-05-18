@@ -83,7 +83,6 @@ public class DBTest {
 		dbAccess.prepareStatement("INSERT INTO CUSTOMERS (NAME,CPR,TROUBLE) values(testShouldntBeHere,0703942881,true").execute();
 		dbAccess.url = "";
 		dbAccess.disConnect();
-
 	}
 
 	@Test(expected = SQLException.class)
