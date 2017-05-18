@@ -2,13 +2,15 @@ package presentationCreditPlan;
 
 import java.math.BigDecimal;
 
+import com.ferrari.finances.dk.rki.Rating;
+
 import domain.BankRate;
 import javafx.scene.control.TextField;
 import logic.InformationController;
 
 class CreditPlanObserver {
-	TextField amount;
-	TextField downPayment;
+	TextField amountTextField;
+	TextField downPaymentTextField;
 	CreditPlanOverview overview;
 	CreditAssesmentGrid grid;
 	CreditPlanStage creditPlanStage;
@@ -19,11 +21,11 @@ class CreditPlanObserver {
 		double amount = 0;
 		double downPayment = 0;
 		double newCustomerRate = Double.parseDouble(grid.getCustomerRate());
-		if (!this.amount.getText().isEmpty())
-			amount = Double.parseDouble(this.amount.getText());
+		if (!this.amountTextField.getText().isEmpty())
+			amount = Double.parseDouble(this.amountTextField.getText());
 
-		if (!this.downPayment.getText().isEmpty())
-			downPayment = Double.parseDouble(this.downPayment.getText());
+		if (!this.downPaymentTextField.getText().isEmpty())
+			downPayment = Double.parseDouble(this.downPaymentTextField.getText());
 
 		if (amount / 2 >= downPayment && !ekstraProcent) {
 			ekstraProcent = true;
@@ -35,6 +37,8 @@ class CreditPlanObserver {
 		
 		grid.setCustomerRate(Double.toString(newCustomerRate));
 		grid.update();
+		
+		
 		if(downPayment!=0) // laver en ny creditPlan og updatere overview
 		creditPlanStage.setOverview(
 				overview.update(new InformationController().newCreditPlan(BigDecimal.valueOf(amount),
@@ -42,11 +46,11 @@ class CreditPlanObserver {
 	}
 
 	void assignAmountTextField(TextField amount) {
-		this.amount = amount;
+		this.amountTextField = amount;
 	}
 
 	void assigndownPaymentTextField(TextField downPayment) {
-		this.downPayment = downPayment;
+		this.downPaymentTextField = downPayment;
 	}
 
 	void assignOverView(CreditPlanOverview overview) {

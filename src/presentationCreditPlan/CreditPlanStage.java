@@ -32,7 +32,7 @@ CreditAssesmentGrid creditGrid;
 		root.setTop(utill);
 		
 		
-		creditGrid = new CreditAssesmentGrid(new InformationController().newCreditAssesment(customer));
+		creditGrid = new CreditAssesmentGrid();
 		creditGrid.setObserver(amountGrid.getObserver());
 		
 /*		CreditAssesmentThread creditAssesmentThread = new CreditAssesmentThread(creditGrid);

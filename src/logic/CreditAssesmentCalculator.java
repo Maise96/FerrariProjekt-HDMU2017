@@ -13,26 +13,20 @@ class CreditAssesmentCalculator {
 		double customerRate = BankRate.rate;
 		switch(CreditRator.i().rate(customer.getCprNr())){
 		case A:
-			creditAssesment.setCreditRating(Rating.A);
 			customerRate +=1;
 			break;
 		case B:
-			creditAssesment.setCreditRating(Rating.B);
 			customerRate +=2;
 			break;
 		case C: 
-			creditAssesment.setCreditRating(Rating.C);
 			customerRate +=3;
 			break;
 		case D:
-			creditAssesment.setCreditRating(Rating.D);
 			customerRate +=10000;
-			/*	throw new BadCustomerException();*/
 		}
 		
 		creditAssesment.setCustomerRate(customerRate);
 		//Tilskrivningen af et ekstraProcentpoint sker i creditPlanObserver
-		
 		//TODO: hvis tilbagebetalingen er over 3år customerRate +=1
 		
 		return creditAssesment;

@@ -9,12 +9,15 @@ import exceptions.ErrorMessage;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import logic.InformationController;
+import presentationCreditPlan.CreditAssesmentThread;
 import presentationCreditPlan.CreditPlanStage;
 
 class RightClickMenu extends ContextMenu {
 	RightClickMenu(Customer customer) {
 		MenuItem flagCustomer;
-
+		CreditPlanStage creditPlanStage = new CreditPlanStage(customer);
+		new CreditAssesmentThread(creditPlanStage.getCreditAssesmentGrid(),customer).start();;
+		
 		if (customer.getTrouble())
 			flagCustomer = new MenuItem("unflag customer");
 		else

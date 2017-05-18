@@ -1,7 +1,5 @@
 package presentationCreditPlan;
 
-import com.ferrari.finances.dk.rki.Rating;
-
 import domain.BankRate;
 import domain.CreditAssesment;
 import javafx.scene.control.Label;
@@ -14,17 +12,18 @@ class CreditAssesmentGrid extends GridPane {
 	private String interestRate;
 	private String creditRating;
 	private String customerRate;
+	private CreditAssesment creditAssesment;
 	CreditPlanObserver obs;
 
-	CreditAssesmentGrid(CreditAssesment creditAssesment) {
-
+	CreditAssesmentGrid() {
+		
 		interestRate = Double.toString(BankRate.rate);
-		creditRating = Rating.A.toString(); /*creditAssesment.getCreditRating().toString();*/
-		customerRate = Double.toString(creditAssesment.getCustomerRate());
-
-		interestRateLabel = new Label("bank rate : " + interestRate);
+		creditRating = "waiting for rki";
+		customerRate = interestRate;
+		
+		interestRateLabel = new Label("bank rate : " + BankRate.rate);
 		creditRatingLabel = new Label("credit rating : " + creditRating);
-		customerRateLabel = new Label("customer rate : " + customerRate);
+		customerRateLabel = new Label("customer rate : " +BankRate.rate);
 
 		this.add(interestRateLabel, 0, 0);
 		this.add(creditRatingLabel, 0, 1);
@@ -62,7 +61,12 @@ class CreditAssesmentGrid extends GridPane {
 		creditRatingLabel.setText("credit rating : " + creditRating);
 		customerRateLabel.setText("customer rate : " + format(customerRate));
 	}
-
+	void newCreditAssesment(CreditAssesment assesment){
+		this.interestRate = Double.toString(assesment.getInterestRate());
+		this.creditRating = assesment.getCreditRating().toString();
+		this.customerRate = Double.toString(assesment.getCustomerRate());
+		update();
+	}
 	void setObserver(CreditPlanObserver obs) {
 		this.obs = obs;
 		obs.tilmeldCreditAssesmentGrid(this);
@@ -75,5 +79,8 @@ class CreditAssesmentGrid extends GridPane {
 		else
 			return s;
 	}
-
+	void setCreditAssesment(CreditAssesment assesment){
+		this.creditAssesment = assesment;
+		newCreditAssesment(assesment);
+	}
 }

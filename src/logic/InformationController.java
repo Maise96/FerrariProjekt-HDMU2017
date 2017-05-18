@@ -33,11 +33,10 @@ public class InformationController {
 		new BankRate().update();
 	}
 
-	public CreditAssesment newCreditAssesment(
-			Customer customer)/* throws BadCustomerException */ {
-		CreditAssesment creditAssesment = new CreditAssesment();
-		creditAssesment = new CreditAssesmentCalculator().newCreditAssesment(customer, new CreditAssesment());
-		return creditAssesment;
+	public double newCustomerRate(
+			Customer customer,CreditAssesment creditAssesment)/* throws BadCustomerException */ {
+		creditAssesment = new CreditAssesmentCalculator().newCreditAssesment(customer, creditAssesment);
+		return creditAssesment.getCustomerRate();
 	}
 
 	public CreditPlan newCreditPlan(BigDecimal amount, BigDecimal downPayment, double customerRate) {
