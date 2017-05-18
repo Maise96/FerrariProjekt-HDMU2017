@@ -13,7 +13,10 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import domain.Customer;
+import exceptions.CustomerAlreadyExistException;
 import exceptions.CustomerDoesNotExistException;
+import exceptions.IllegalCprException;
+import exceptions.IllegalNameException;
 import logic.InformationController;
 
 public class DBTest {
@@ -31,7 +34,6 @@ public class DBTest {
 
 	@Test
 	public void testAbort() {
-		db db = new db();
 		new dbAccessTest().testAbort();
 	}
 
@@ -86,7 +88,6 @@ public class DBTest {
 		} catch (IOException e) {
 			fail("IOException");
 		}
-
 	}
 
 	@Test
@@ -95,8 +96,33 @@ public class DBTest {
 			new IOExceptionGenerator();
 		}
 	}
-	
-
+	@Test
+	public void switchTroubleStateTest(){
+		Customer customer = new Customer("test","0703942881",false);
+		try {
+			new InformationController().newCustomer(customer.getName(),customer.getCprNr());
+		} catch (IllegalNameException | IllegalCprException | SQLException | CustomerAlreadyExistException e) {
+		}
+		db db = new db();
+		try {
+			db.switchTroubleState(customer);
+		} catch (SQLException | CustomerDoesNotExistException e) {
+		}
+		assertTrue(db.searchCustomers("test", "0703942881").get(0).getTrouble());
+		try {
+			db.deleteCustomer(customer);
+		} catch (CustomerDoesNotExistException e) {
+		} catch (SQLException e) {
+		}
+	}
+	@Test (expected = CustomerDoesNotExistException.class)
+	public void testSwitchTroubleStateCustomerDoesNotExistException() throws CustomerDoesNotExistException{
+		db db = new db();
+		try {
+			db.switchTroubleState(new Customer("asædlhbkjhaldjsfhl","1234567890",false));
+		} catch (SQLException e) {
+		}
+	}
 	@Test(expected = SQLException.class)
 	public void testSQLExceptionDisConnect() throws SQLException {
 		DBAccessMock dbAccess = new DBAccessMock();
