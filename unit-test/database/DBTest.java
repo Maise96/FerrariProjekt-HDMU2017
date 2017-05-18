@@ -91,16 +91,10 @@ public class DBTest {
 	}
 
 	@Test
-	public void testDBLoggerException() throws IOException {
-		for (int i = 0; i < 10; i++) {
-			new IOExceptionGenerator();
-		}
-	}
-	@Test
-	public void switchTroubleStateTest(){
-		Customer customer = new Customer("test","0703942881",false);
+	public void switchTroubleStateTest() {
+		Customer customer = new Customer("test", "0703942881", false);
 		try {
-			new InformationController().newCustomer(customer.getName(),customer.getCprNr());
+			new InformationController().newCustomer(customer.getName(), customer.getCprNr());
 		} catch (IllegalNameException | IllegalCprException | SQLException | CustomerAlreadyExistException e) {
 		}
 		db db = new db();
@@ -115,14 +109,16 @@ public class DBTest {
 		} catch (SQLException e) {
 		}
 	}
-	@Test (expected = CustomerDoesNotExistException.class)
-	public void testSwitchTroubleStateCustomerDoesNotExistException() throws CustomerDoesNotExistException{
+
+	@Test(expected = CustomerDoesNotExistException.class)
+	public void testSwitchTroubleStateCustomerDoesNotExistException() throws CustomerDoesNotExistException {
 		db db = new db();
 		try {
-			db.switchTroubleState(new Customer("asædlhbkjhaldjsfhl","1234567890",false));
+			db.switchTroubleState(new Customer("asï¿½dlhbkjhaldjsfhl", "1234567890", false));
 		} catch (SQLException e) {
 		}
 	}
+
 	@Test(expected = SQLException.class)
 	public void testSQLExceptionDisConnect() throws SQLException {
 		DBAccessMock dbAccess = new DBAccessMock();
@@ -160,29 +156,4 @@ public class DBTest {
 	private class DBAccessMock extends DBAccess {
 	}
 
-	private class IOExceptionGenerator extends Thread {
-
-		public IOExceptionGenerator() throws IOException {
-			generateException();
-			System.out.println("thread started: " + this.getName());
-		}
-
-		void generateException() throws IOException {
-			try {
-				for (int i = 0; i < 10; i++) {
-					new DBLogger("test", new InsetCustomerDB());
-					i++;
-					Thread.sleep(2);
-					
-					BufferedReader br = new BufferedReader(new FileReader("database log"));
-					while (br.ready()) {
-						br.readLine();
-					}
-					br.close();
-					Thread.sleep(2);
-				}
-			} catch (InterruptedException | FileNotFoundException e) {
-			}
-		}
-	}
 }
